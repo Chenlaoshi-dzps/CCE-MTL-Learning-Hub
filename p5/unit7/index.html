@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="zh-SG">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#180a2a">
+<title>Unit 7 · 我们的生活经历 · CL × CCE × Oral</title>
+<style>
+:root{
+  --bg:#0b0611;--bg2:#180a2a;--panel:rgba(43,20,70,.78);--panel2:rgba(25,11,43,.92);
+  --purple:#7f4bc0;--purple2:#b07ae5;--lav:#e5d3f6;--gold:#e0bb62;--gold2:#f5d98d;
+  --cream:#fff5df;--soft:#d9c9e7;--green:#73b98e;--red:#d46c7e;--blue:#6fa8d6;
+  --line:rgba(224,187,98,.28);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;color:var(--cream);
+  font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  background:
+    radial-gradient(900px 620px at 5% -5%,rgba(123,57,176,.42),transparent 62%),
+    radial-gradient(850px 630px at 98% 18%,rgba(77,33,121,.38),transparent 60%),
+    radial-gradient(750px 600px at 50% 105%,rgba(176,122,229,.22),transparent 60%),
+    linear-gradient(155deg,var(--bg),var(--bg2),#0c0615);
+  overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.42;
+  background-image:
+    radial-gradient(circle at 12% 18%,#f5d98d 0 1px,transparent 1.4px),
+    radial-gradient(circle at 38% 8%,#dfc8f5 0 1px,transparent 1.4px),
+    radial-gradient(circle at 72% 25%,#f5d98d 0 1px,transparent 1.4px),
+    radial-gradient(circle at 91% 52%,#dfc8f5 0 1px,transparent 1.4px),
+    radial-gradient(circle at 22% 78%,#f5d98d 0 1px,transparent 1.4px);
+  background-size:270px 245px,320px 285px,350px 310px,295px 270px,340px 315px;
+  animation:starDrift 22s linear infinite;
+}
+@keyframes starDrift{50%{transform:translateY(-12px)}}
+button,a{font:inherit}
+button{touch-action:manipulation}
+.wrap{position:relative;z-index:2;max-width:980px;margin:auto;padding:16px 16px 85px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;position:sticky;top:0;z-index:20;padding:8px 0;background:linear-gradient(var(--bg2),transparent)}
+.back,.music{
+  border:1px solid var(--line);background:rgba(18,8,31,.82);color:var(--gold2);
+  text-decoration:none;border-radius:999px;padding:9px 13px;font-weight:900;cursor:pointer;
+}
+.scoreboard{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}
+.score{
+  border:1px solid rgba(176,122,229,.26);background:rgba(127,75,192,.12);
+  border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900;color:#ead7fa;
+}
+.hero{text-align:center;padding:34px 8px 18px}
+.hero-seal{
+  width:78px;height:78px;margin:auto;border-radius:50%;display:grid;place-items:center;font-size:42px;
+  border:1px solid rgba(245,217,141,.42);
+  background:radial-gradient(circle,rgba(176,122,229,.35),rgba(85,37,135,.10));
+  box-shadow:0 0 38px rgba(176,122,229,.28);
+  animation:sealFloat 4s ease-in-out infinite;
+}
+@keyframes sealFloat{50%{transform:translateY(-7px) rotate(5deg);box-shadow:0 0 50px rgba(176,122,229,.38)}}
+.kicker{display:inline-block;color:var(--gold2);font-size:12px;font-weight:950;letter-spacing:.13em;margin-top:13px}
+h1{
+  margin:7px 0 5px;font-size:clamp(38px,7vw,62px);line-height:1.05;
+  background:linear-gradient(90deg,var(--gold2),#fff2d7 34%,var(--purple2) 70%,var(--gold));
+  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:titleShine 7s linear infinite;
+}
+@keyframes titleShine{50%{background-position:100% 50%}}
+.hero h2{margin:5px 0 13px;font-size:clamp(22px,4vw,33px)}
+.hero p{max-width:790px;margin:auto;color:var(--soft);line-height:1.7}
+.bridge{
+  margin:22px auto 0;padding:14px 15px;border-radius:18px;max-width:820px;
+  border:1px solid rgba(224,187,98,.32);background:rgba(127,75,192,.11);font-weight:900;color:#f0dba7;
+}
+.progress-shell{margin:24px auto 8px;max-width:820px}
+.progress-top{display:flex;justify-content:space-between;color:var(--soft);font-size:13px;margin-bottom:7px}
+.progress{height:11px;background:rgba(255,255,255,.08);border:1px solid rgba(176,122,229,.18);border-radius:999px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--gold));transition:width .5s}
+
+.intro-card{
+  margin:25px 0;padding:20px;border:1px solid var(--line);border-radius:22px;
+  background:linear-gradient(145deg,rgba(76,32,119,.22),rgba(19,8,32,.80));
+}
+.intro-card h3{margin:0 0 10px;color:var(--gold2)}
+.intro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.intro-pill{padding:12px;border-radius:15px;background:rgba(176,122,229,.07);border:1px solid rgba(176,122,229,.16);font-size:13px;line-height:1.5}
+
+.mission{
+  position:relative;margin:26px 0;border:1px solid rgba(224,187,98,.29);border-radius:25px;
+  background:linear-gradient(160deg,rgba(64,28,102,.25),rgba(19,8,32,.90));overflow:hidden;
+  box-shadow:0 18px 42px rgba(0,0,0,.30);
+}
+.mission.locked{filter:saturate(.45);opacity:.58}
+.mission.locked .mission-body{display:none}
+.mission-head{padding:20px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(224,187,98,.13)}
+.mission-no{
+  width:54px;height:54px;min-width:54px;border-radius:18px;display:grid;place-items:center;font-size:28px;
+  border:1px solid rgba(224,187,98,.28);background:rgba(127,75,192,.12)
+}
+.mission-head h3{margin:0 0 3px;font-size:22px}
+.mission-head p{margin:0;color:var(--soft);font-size:13px}
+.lock-msg{margin-left:auto;font-size:12px;color:#bca9c9}
+.mission-body{padding:20px}
+.task-title{font-size:17px;font-weight:950;color:var(--gold2);margin-bottom:11px}
+.task-text{color:var(--soft);line-height:1.65;margin-bottom:14px}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.option{
+  border:1px solid rgba(176,122,229,.24);background:rgba(176,122,229,.07);color:var(--cream);
+  border-radius:16px;padding:13px;text-align:left;font-weight:800;cursor:pointer;transition:.18s;
+}
+.option:hover{transform:translateY(-2px);border-color:var(--gold)}
+.option.correct{background:rgba(115,185,142,.16);border-color:var(--green)}
+.option.wrong{background:rgba(212,108,126,.14);border-color:var(--red)}
+.feedback{
+  display:none;margin-top:12px;padding:12px 13px;border-radius:14px;line-height:1.55;font-size:13px;
+  border:1px solid rgba(224,187,98,.20);background:rgba(224,187,98,.06)
+}
+.feedback.show{display:block}
+.feedback.good{color:#cfe9d8}.feedback.bad{color:#f0c2ca}
+.next-btn,.complete-btn{
+  display:none;margin-top:14px;border:0;border-radius:999px;background:var(--gold);color:#1a0d28;
+  padding:10px 17px;font-weight:950;cursor:pointer;
+}
+.next-btn.show,.complete-btn.show{display:inline-block}
+
+.story-path{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}
+.story-node{padding:10px 12px;border-radius:14px;border:1px solid rgba(176,122,229,.18);background:rgba(176,122,229,.06);font-size:13px;font-weight:850}
+.story-arrow{color:var(--gold2);font-weight:950}
+
+.sort-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sort-bin{min-height:155px;padding:13px;border-radius:17px;border:1px dashed rgba(176,122,229,.35);background:rgba(176,122,229,.045)}
+.sort-bin h4{margin:0 0 10px}
+.choice-chip{
+  display:block;width:100%;margin:7px 0;padding:10px;border-radius:13px;border:1px solid rgba(176,122,229,.20);
+  background:rgba(176,122,229,.08);color:var(--cream);text-align:left;cursor:pointer;font-weight:800;
+}
+.choice-chip.selected{opacity:.38}
+.bin-list{display:grid;gap:6px}
+.bin-item{padding:8px 9px;border-radius:11px;background:rgba(224,187,98,.08);border:1px solid rgba(224,187,98,.15);font-size:12px}
+
+.scenario-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.scenario{
+  border:1px solid rgba(176,122,229,.20);border-radius:18px;padding:14px;background:rgba(176,122,229,.055)
+}
+.scene-icon{font-size:50px;text-align:center;margin:6px}
+.scenario h4{margin:5px 0 7px;color:var(--gold2)}
+.scenario p{font-size:13px;color:var(--soft);line-height:1.55}
+.scene-answer{
+  width:100%;margin:5px 0;padding:9px;border-radius:12px;border:1px solid rgba(176,122,229,.20);
+  background:rgba(176,122,229,.07);color:var(--cream);text-align:left;cursor:pointer;font-weight:780
+}
+
+.potion{
+  position:relative;text-align:center;margin:12px auto 18px;width:150px;height:150px;border-radius:50%;
+  display:grid;place-items:center;font-size:65px;background:radial-gradient(circle,rgba(127,75,192,.28),rgba(29,12,49,.20));
+  border:1px solid rgba(224,187,98,.32);box-shadow:0 0 30px rgba(127,75,192,.22)
+}
+.potion.brew{animation:brew 1.2s ease-in-out}
+@keyframes brew{30%{transform:rotate(-8deg) scale(1.05)}60%{transform:rotate(8deg) scale(1.07)}}
+.potion-meter{display:flex;justify-content:center;gap:7px;margin-bottom:12px}
+.drop{width:17px;height:17px;border-radius:50%;background:rgba(255,255,255,.10);border:1px solid rgba(176,122,229,.25)}
+.drop.on{background:var(--gold);box-shadow:0 0 12px rgba(224,187,98,.55)}
+
+.video-stage{
+  position:relative;border-radius:20px;border:1px solid rgba(176,122,229,.25);overflow:hidden;
+  background:linear-gradient(160deg,#26133a,#12091f);min-height:315px
+}
+.video-bar{display:flex;justify-content:space-between;padding:10px 13px;background:rgba(0,0,0,.28);font-size:12px;color:var(--soft)}
+.frames{position:relative;height:255px}
+.frame{
+  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:20px;text-align:center;opacity:0;transform:scale(.97);transition:opacity .45s,transform .45s
+}
+.frame.active{opacity:1;transform:scale(1)}
+.frame .bigscene{font-size:72px}
+.frame h4{font-size:20px;margin:10px 0 5px;color:var(--gold2)}
+.frame p{margin:0;max-width:550px;color:var(--soft);line-height:1.55}
+.video-controls{display:flex;justify-content:center;gap:8px;padding:13px}
+.play-btn,.scene-toggle{
+  border:1px solid rgba(224,187,98,.28);background:rgba(224,187,98,.08);color:var(--gold2);
+  border-radius:999px;padding:9px 14px;font-weight:900;cursor:pointer
+}
+.play-btn.primary{background:var(--gold);color:#1a0d28;border:0}
+
+.vocab-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
+.vocab{
+  display:flex;align-items:center;gap:8px;padding:10px;border-radius:13px;border:1px solid rgba(176,122,229,.18);
+  background:rgba(176,122,229,.055)
+}
+.vocab strong{display:block;font-size:13px}.vocab small{color:var(--soft)}
+.speak{border:0;background:rgba(224,187,98,.12);color:var(--gold2);border-radius:50%;width:34px;height:34px;cursor:pointer}
+
+.oraltabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:13px}
+.oraltab{
+  border:1px solid rgba(176,122,229,.20);background:rgba(176,122,229,.06);color:var(--cream);
+  border-radius:999px;padding:8px 12px;font-weight:850;cursor:pointer
+}
+.oraltab.active{background:var(--gold);color:#1a0d28;border-color:var(--gold)}
+.oral-panel{display:none}.oral-panel.active{display:block}
+.question{
+  padding:14px;border-radius:15px;border:1px solid rgba(224,187,98,.24);background:rgba(224,187,98,.06);
+  font-weight:900;line-height:1.55;color:#f3e2b7
+}
+.scaffold{margin:13px 0;padding:13px;border-radius:15px;background:rgba(176,122,229,.055);border:1px solid rgba(176,122,229,.17)}
+.scaffold h4,.mq h4{margin:0 0 8px;color:var(--gold2)}
+.scaffold p{margin:6px 0;color:var(--soft);line-height:1.5}
+.mq{padding:13px;border-radius:15px;border:1px solid rgba(176,122,229,.17);background:rgba(176,122,229,.04)}
+.check{display:flex;gap:8px;align-items:flex-start;margin:8px 0;color:var(--soft);font-size:13px}
+.check input{margin-top:3px;width:18px;height:18px}
+.timer-box{text-align:center;margin:14px 0}
+.timer{font-size:42px;font-weight:950;color:var(--gold2)}
+.timer-btn{
+  border:1px solid rgba(224,187,98,.28);background:rgba(224,187,98,.08);color:var(--gold2);
+  border-radius:999px;padding:9px 15px;font-weight:900;cursor:pointer
+}
+.recorder{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:13px}
+.rec-btn{
+  border:1px solid rgba(176,122,229,.23);background:rgba(176,122,229,.08);color:var(--cream);
+  border-radius:999px;padding:10px 14px;font-weight:900;cursor:pointer
+}
+.rec-btn.recording{background:rgba(212,108,126,.18);border-color:var(--red)}
+audio{width:100%;margin-top:12px}
+.record-note{font-size:12px;color:var(--soft);text-align:center;margin-top:8px}
+
+.badge-box{text-align:center;padding:25px 16px}
+.badge-big{font-size:75px;animation:badgeGlow 2.4s ease-in-out infinite}
+@keyframes badgeGlow{50%{transform:scale(1.08);filter:drop-shadow(0 0 18px rgba(224,187,98,.55))}}
+.badge-box h3{font-size:25px;margin:7px 0;color:var(--gold2)}
+.badge-box p{color:var(--soft);line-height:1.65}
+.reset{
+  border:1px solid rgba(176,122,229,.20);background:rgba(176,122,229,.07);color:var(--soft);
+  border-radius:999px;padding:8px 12px;cursor:pointer
+}
+.spark{position:fixed;z-index:999;pointer-events:none;color:var(--gold2);animation:burst .9s ease-out forwards}
+@keyframes burst{to{opacity:0;transform:translate(var(--x),var(--y)) scale(1.5) rotate(140deg)}}
+
+@media(max-width:680px){
+  .topbar{align-items:flex-start}.scoreboard{max-width:145px}
+  .intro-grid,.options,.sort-grid,.scenario-grid,.vocab-grid{grid-template-columns:1fr}
+  .mission-head{align-items:flex-start}.lock-msg{font-size:0}.lock-msg:after{content:"🔒";font-size:15px}
+  .frames{height:285px}
+}
+@media(prefers-reduced-motion:reduce){
+  body:before,.hero-seal,h1,.badge-big{animation:none}.frame{transition:none}
+}
+
+.score-pop{animation:scorePop .55s cubic-bezier(.2,.9,.2,1.2)}
+@keyframes scorePop{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.28);color:#f5d98d;text-shadow:0 0 14px rgba(245,217,141,.75)}
+  100%{transform:scale(1)}
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a class="back" href="../">← Unit 列表</a>
+    <div class="scoreboard">
+      <span class="score">✨ 魔法分 <b id="points">0</b></span>
+      <span class="score">💎 宝石 <b id="gems">0</b>/6</span>
+    </div>
+    <button class="music" id="music">♫ 音乐</button>
+  </div>
+
+  <header class="hero">
+    <div class="hero-seal">🧭</div>
+    <span class="kicker">P5 · THEME 3 · UNIT 7</span>
+    <h1>我们的生活经历</h1>
+    <h2>《同学之间》× CCE × Oral 魔法任务</h2>
+    <p>不同的生活经历、习惯和性格，会影响我们的想法和感受。通过华文课文、CCE 情境和录像口试任务，学习尊重不同的想法、关心同学的感受，并用华文表达价值观。</p>
+    <div class="bridge">📖 CL《同学之间》 → ❤️ CCE《我们的生活经历》 → 🌱 联系生活 → 🎤 看录像说话</div>
+    <div class="progress-shell">
+      <div class="progress-top"><span>魔法学习进度</span><span id="progressText">0 / 6 Missions</span></div>
+      <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+  </header>
+
+  <section class="intro-card">
+    <h3>🎯 Unit 7 学习目标</h3>
+    <div class="intro-grid">
+      <div class="intro-pill"><b>生活经历</b><br>了解大家都有不同的生活经历。</div>
+      <div class="intro-pill"><b>尊重与敏感度</b><br>理解关注别人的感受、尊重不同观点的重要性。</div>
+      <div class="intro-pill"><b>沟通</b><br>学习与拥有不同经历和观点的人交流。</div>
+    </div>
+  </section>
+
+  <!-- Mission 1 -->
+  <section class="mission" id="m1" data-mission="1">
+    <div class="mission-head">
+      <div class="mission-no">📖</div>
+      <div><h3>Mission 1 · 《同学之间》侦探任务</h3><p>从华文课文找出“友好相处”的关键魔法。</p></div>
+    </div>
+    <div class="mission-body">
+      <div class="task-title">🔍 同学之间发生误会时，最好的第一步是什么？</div>
+      <div class="task-text">课文提醒我们：发生误会或冲突时，不要急着生气或打架，要先了解发生了什么。</div>
+      <div class="options" data-q="m1q1">
+        <button class="option" data-correct="false">A. 马上生气，不听解释</button>
+        <button class="option" data-correct="true">B. 先问清楚，听同学解释</button>
+        <button class="option" data-correct="false">C. 和同学打架</button>
+        <button class="option" data-correct="false">D. 以后都不跟他说话</button>
+      </div>
+      <div class="feedback" id="fb-m1q1"></div>
+      <div class="story-path">
+        <span class="story-node">发生误会</span><span class="story-arrow">→</span>
+        <span class="story-node">问清楚</span><span class="story-arrow">→</span>
+        <span class="story-node">用心听</span><span class="story-arrow">→</span>
+        <span class="story-node">理解原因</span><span class="story-arrow">→</span>
+        <span class="story-node">好好沟通 / 和好</span>
+      </div>
+      <button class="complete-btn" id="complete1">✨ Mission 1 完成</button>
+    </div>
+  </section>
+
+  <!-- Mission 2 -->
+  <section class="mission locked" id="m2" data-mission="2">
+    <div class="mission-head">
+      <div class="mission-no">🪞</div>
+      <div><h3>Mission 2 · 不同经历魔法镜</h3><p>同一个班级，也可能有不同习惯、性格和生活经历。</p></div>
+      <span class="lock-msg">🔒 完成上一关解锁</span>
+    </div>
+    <div class="mission-body">
+      <div class="task-title">🧩 把情境放到正确的“魔法镜”</div>
+      <div class="task-text">先点击下面的情境，再选择它更接近哪一种差异。</div>
+
+      <div id="sortChoices">
+        <button class="choice-chip" data-cat="habit">✋ 左撇子使用为右手设计的剪刀，可能觉得不方便。</button>
+        <button class="choice-chip" data-cat="personality">🌳 很多人一起说话时，比较文静的同学可能会紧张。</button>
+        <button class="choice-chip" data-cat="habit">🍽️ 左右手习惯不同，吃饭时手肘可能会碰到。</button>
+        <button class="choice-chip" data-cat="personality">🎉 有些同学喜欢热闹，有些同学喜欢安静一点。</button>
+      </div>
+
+      <div class="sort-grid">
+        <div class="sort-bin" data-bin="habit"><h4>✋ 不同习惯 / 经历</h4><div class="bin-list"></div></div>
+        <div class="sort-bin" data-bin="personality"><h4>🌿 不同性格 / 感受</h4><div class="bin-list"></div></div>
+      </div>
+      <div class="feedback" id="fb-sort"></div>
+      <button class="complete-btn" id="complete2">✨ Mission 2 完成</button>
+    </div>
+  </section>
+
+  <!-- Mission 3 -->
+  <section class="mission locked" id="m3" data-mission="3">
+    <div class="mission-head">
+      <div class="mission-no">🧪</div>
+      <div><h3>Mission 3 · 尊重与关爱魔法药水</h3><p>选择正确行动，调出“友好相处药水”。</p></div>
+      <span class="lock-msg">🔒 完成上一关解锁</span>
+    </div>
+    <div class="mission-body">
+      <div class="potion" id="potion">🧙‍♀️🫧</div>
+      <div class="potion-meter" id="potionMeter"><span class="drop"></span><span class="drop"></span><span class="drop"></span><span class="drop"></span></div>
+      <div class="task-title">把 4 个正确的“价值材料”加入药水：</div>
+      <div class="options" id="potionOptions">
+        <button class="option" data-good="true">👂 用心听同学说话</button>
+        <button class="option" data-good="false">😠 有误会就马上发脾气</button>
+        <button class="option" data-good="true">💬 先问清楚，再好好沟通</button>
+        <button class="option" data-good="true">🤝 看到同学有困难，主动帮助</button>
+        <button class="option" data-good="false">🙄 只顾自己的想法</button>
+        <button class="option" data-good="true">🌿 尊重不同性格和想法</button>
+        <button class="option" data-good="false">😂 嘲笑和自己不同的同学</button>
+      </div>
+      <div class="feedback" id="fb-potion"></div>
+      <button class="complete-btn" id="complete3">✨ Mission 3 完成</button>
+    </div>
+  </section>
+
+  <!-- Mission 4 -->
+  <section class="mission locked" id="m4" data-mission="4">
+    <div class="mission-head">
+      <div class="mission-no">🌱</div>
+      <div><h3>Mission 4 · CCE → 我的生活</h3><p>把课堂价值学习连接到真实同学相处经验。</p></div>
+      <span class="lock-msg">🔒 完成上一关解锁</span>
+    </div>
+    <div class="mission-body">
+      <div class="scenario-grid">
+        <div class="scenario">
+          <div class="scene-icon">😟👂</div>
+          <h4>情境 A：文静的同学</h4>
+          <p>一个比较文静的同学需要一点时间才敢说出自己的想法。你会怎么做？</p>
+          <button class="scene-answer" data-good="false">催他：“快点说啦！”</button>
+          <button class="scene-answer" data-good="true">给他时间，并鼓励他慢慢说。</button>
+          <button class="scene-answer" data-good="false">不理他，因为他很安静。</button>
+        </div>
+        <div class="scenario">
+          <div class="scene-icon">🤕🎒</div>
+          <h4>情境 B：同学受伤</h4>
+          <p>同学的手受伤了，拿书包不方便。你会怎么做？</p>
+          <button class="scene-answer" data-good="true">主动问他需不需要帮助，并帮他拿书包。</button>
+          <button class="scene-answer" data-good="false">假装没有看到。</button>
+          <button class="scene-answer" data-good="false">笑他动作很慢。</button>
+        </div>
+      </div>
+      <div class="feedback" id="fb-scenes"></div>
+      <button class="complete-btn" id="complete4">✨ Mission 4 完成</button>
+    </div>
+  </section>
+
+  <!-- Mission 5 -->
+  <section class="mission locked" id="m5" data-mission="5">
+    <div class="mission-head">
+      <div class="mission-no">🎬</div>
+      <div><h3>Mission 5 · 魔法录像观察室</h3><p>看“录像”抓重点，为口试准备内容和词语。</p></div>
+      <span class="lock-msg">🔒 完成上一关解锁</span>
+    </div>
+    <div class="mission-body">
+      <div class="video-stage">
+        <div class="video-bar"><span>🎬 P5 Oral Practice</span><span id="sceneLabel">Scene A · 帮助受伤同学</span></div>
+        <div class="frames" id="framesA">
+          <div class="frame active"><div class="bigscene">👦📚</div><h4>第一幕</h4><p>一个男生准备离开。他看到同学的右手受伤了。</p></div>
+          <div class="frame"><div class="bigscene">🤕🎒</div><h4>第二幕</h4><p>受伤的同学拿东西不方便。</p></div>
+          <div class="frame"><div class="bigscene">🤝😊</div><h4>第三幕</h4><p>男生主动上前，帮同学拿书包。</p></div>
+        </div>
+        <div class="frames" id="framesB" style="display:none">
+          <div class="frame active"><div class="bigscene">👧📝</div><h4>第一幕</h4><p>课室里，一个女生看着只有 20 分的听写，看起来不开心。</p></div>
+          <div class="frame"><div class="bigscene">👓👧💬</div><h4>第二幕</h4><p>另一个女生走过来安慰她。</p></div>
+          <div class="frame"><div class="bigscene">📖🤝😊</div><h4>第三幕</h4><p>她还帮同学温习，女生脸上露出笑容。</p></div>
+        </div>
+        <div class="video-controls">
+          <button class="scene-toggle" id="sceneSwitch">切换 Scene B</button>
+          <button class="play-btn primary" id="playVideo">▶ 播放录像</button>
+        </div>
+      </div>
+
+      <div class="task-title" style="margin-top:16px">🔍 录像中最重要的共同点是什么？</div>
+      <div class="options" data-q="m5q1">
+        <button class="option" data-correct="true">A. 同学看到别人有困难，会主动关心和帮助。</button>
+        <button class="option" data-correct="false">B. 同学只需要照顾自己。</button>
+        <button class="option" data-correct="false">C. 同学有困难时，我们应该离开。</button>
+        <button class="option" data-correct="false">D. 成绩不好就不需要朋友。</button>
+      </div>
+      <div class="feedback" id="fb-m5q1"></div>
+
+      <div class="task-title" style="margin-top:18px">🔊 Oral 词语魔法书</div>
+      <div class="vocab-grid">
+        <div class="vocab"><button class="speak" data-say="主动关心">🔊</button><div><strong>主动关心</strong><small>zhǔ dòng guān xīn</small></div></div>
+        <div class="vocab"><button class="speak" data-say="伸出援手">🔊</button><div><strong>伸出援手</strong><small>shēn chū yuán shǒu</small></div></div>
+        <div class="vocab"><button class="speak" data-say="安慰同学">🔊</button><div><strong>安慰同学</strong><small>ān wèi tóng xué</small></div></div>
+        <div class="vocab"><button class="speak" data-say="互相帮助">🔊</button><div><strong>互相帮助</strong><small>hù xiāng bāng zhù</small></div></div>
+        <div class="vocab"><button class="speak" data-say="不方便">🔊</button><div><strong>不方便</strong><small>bù fāng biàn</small></div></div>
+        <div class="vocab"><button class="speak" data-say="脸上露出笑容">🔊</button><div><strong>脸上露出笑容</strong><small>liǎn shàng lù chū xiào róng</small></div></div>
+      </div>
+      <button class="complete-btn" id="complete5">✨ Mission 5 完成</button>
+    </div>
+  </section>
+
+  <!-- Mission 6 -->
+  <section class="mission locked" id="m6" data-mission="6">
+    <div class="mission-head">
+      <div class="mission-no">🎤</div>
+      <div><h3>Mission 6 · Oral Boss Challenge</h3><p>把 CL + CCE + 生活经验变成自己的口试回答。</p></div>
+      <span class="lock-msg">🔒 完成上一关解锁</span>
+    </div>
+    <div class="mission-body">
+      <div class="oraltabs">
+        <button class="oraltab active" data-tab="q1">Q1 录像内容</button>
+        <button class="oraltab" data-tab="q2">Q2 个人经历</button>
+        <button class="oraltab" data-tab="q3">Q3 建议</button>
+      </div>
+
+      <div class="oral-panel active" id="q1">
+        <div class="question">Q1：视频中最引起你注意的一件事是什么？为什么？</div>
+        <div class="scaffold"><h4>🪄 句式魔法</h4>
+          <p>在视频中，我看到……</p><p>最引起我注意的是……</p>
+          <p>我觉得他／她这样做是对的，因为……</p>
+          <p>这体现了关爱／尊重／互相帮助的价值。</p>
+          <p>我认为同学之间应该……</p>
+        </div>
+        <div class="mq"><h4>🧠 MQ Pre-planning</h4>
+          <label class="check"><input type="checkbox">我说了发生什么事。</label>
+          <label class="check"><input type="checkbox">我说了谁帮助谁。</label>
+          <label class="check"><input type="checkbox">我解释了为什么引起注意。</label>
+          <label class="check"><input type="checkbox">我说了体现什么价值。</label>
+        </div>
+      </div>
+
+      <div class="oral-panel" id="q2">
+        <div class="question">Q2：你有没有帮助过同学，或被同学帮助过？请说一说。</div>
+        <div class="scaffold"><h4>🪄 句式魔法</h4>
+          <p>有一次，我……</p><p>当时，我看到同学……</p><p>所以，我主动……</p>
+          <p>我这样做是因为……</p><p>这让我想到 CCE 课教我们……</p>
+          <p>这也让我想到《同学之间》教我们……</p><p>通过这件事，我学会了……</p>
+        </div>
+        <div class="mq"><h4>🧠 MQ Pre-planning</h4>
+          <label class="check"><input type="checkbox">我说了什么时候／在哪里。</label>
+          <label class="check"><input type="checkbox">我说了谁需要帮助。</label>
+          <label class="check"><input type="checkbox">我说了我怎样帮助。</label>
+          <label class="check"><input type="checkbox">我连接了 CCE／华文课文。</label>
+          <label class="check"><input type="checkbox">我说了学到什么。</label>
+        </div>
+      </div>
+
+      <div class="oral-panel" id="q3">
+        <div class="question">Q3：老师、家长或学校可以怎样鼓励孩子关爱同学、友好相处？</div>
+        <div class="scaffold"><h4>🪄 句式魔法</h4>
+          <p>我认为老师／家长／学校可以……</p><p>首先……</p><p>其次……</p>
+          <p>例如……</p><p>这样做可以帮助孩子……</p><p>所以……</p>
+        </div>
+        <div class="mq"><h4>🧠 MQ Pre-planning</h4>
+          <label class="check"><input type="checkbox">我提出了至少两个建议。</label>
+          <label class="check"><input type="checkbox">我解释了为什么这些建议有用。</label>
+          <label class="check"><input type="checkbox">我连接了录像／CCE／华文课文。</label>
+          <label class="check"><input type="checkbox">我说了希望带来的好结果。</label>
+        </div>
+      </div>
+
+      <div class="timer-box">
+        <div class="timer" id="timer">30</div>
+        <button class="timer-btn" id="timerBtn">⏳ 开始 30 秒准备</button>
+      </div>
+
+      <div class="recorder">
+        <button class="rec-btn" id="startRec">🎙️ 开始录音</button>
+        <button class="rec-btn" id="stopRec" disabled>⏹️ 停止</button>
+      </div>
+      <audio id="playback" controls style="display:none"></audio>
+      <div class="record-note">录音只保留在当前浏览器里，不会自动上传。首次使用时浏览器会询问麦克风权限。</div>
+
+      <button class="complete-btn" id="complete6">🏆 完成 Oral Boss Challenge</button>
+    </div>
+  </section>
+
+  <section class="mission locked" id="finalBadge">
+    <div class="badge-box">
+      <div class="badge-big">🏆💜</div>
+      <h3>Unit 7 Mission Complete!</h3>
+      <p>你已经完成《同学之间》×《我们的生活经历》× Oral 的魔法学习路线。</p>
+      <p><b>你解锁了：</b>尊重不同想法 · 关注别人感受 · 用心听 · 好好沟通 · 互相帮助</p>
+      <button class="reset" id="reset">重新挑战 Unit 7</button>
+    </div>
+  </section>
+</div>
+
+<script>
+const KEY='p5-unit7-magic-progress-v1';
+let state={done:[],points:0,gems:0};
+try{state=JSON.parse(localStorage.getItem(KEY))||state}catch(e){}
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+
+function save(){localStorage.setItem(KEY,JSON.stringify(state));renderProgress()}
+function renderProgress(){
+  $('#points').textContent=state.points;
+  $('#gems').textContent=state.gems;
+  $('#progressText').textContent=`${state.done.length} / 6 Missions`;
+  $('#progressFill').style.width=`${Math.min(state.done.length,6)/6*100}%`;
+  for(let i=2;i<=6;i++){
+    if(state.done.includes(i-1)) unlock(i);
+  }
+  state.done.forEach(n=>{
+    const btn=$(`#complete${n}`);
+    if(btn){btn.textContent='✅ 已完成';btn.classList.add('show');btn.disabled=true}
+  });
+  if(state.done.includes(6)) $('#finalBadge').classList.remove('locked');
+}
+function unlock(n){
+  const el=$(`#m${n}`);if(!el)return;
+  el.classList.remove('locked');
+  const msg=el.querySelector('.lock-msg');if(msg)msg.textContent='✨ 已解锁';
+}
+function burst(x,y,count=14){
+  for(let i=0;i<count;i++){
+    const s=document.createElement('span');s.className='spark';s.textContent=Math.random()>.45?'✦':'·';
+    s.style.left=x+'px';s.style.top=y+'px';
+    const a=Math.random()*Math.PI*2,d=25+Math.random()*55;
+    s.style.setProperty('--x',Math.cos(a)*d+'px');s.style.setProperty('--y',Math.sin(a)*d+'px');
+    document.body.appendChild(s);setTimeout(()=>s.remove(),1000);
+  }
+}
+function finishMission(n,btn=null){
+  if(state.done.includes(n))return false;
+  state.done.push(n);
+  state.points+=100;
+  state.gems=Math.min(6,state.gems+1);
+  save();
+  ['points','gems'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){el.classList.remove('score-pop');void el.offsetWidth;el.classList.add('score-pop');}
+  });
+
+  if(btn){
+    btn.textContent='✅ Mission 完成';
+    btn.disabled=true;
+    btn.classList.add('show');
+    const r=btn.getBoundingClientRect();
+    burst(r.left+r.width/2,r.top+r.height/2,25);
+  }else{
+    const mission=document.querySelector(`#m${n}`);
+    if(mission){
+      const r=mission.getBoundingClientRect();
+      burst(window.innerWidth/2, Math.min(window.innerHeight-100, Math.max(100,r.top+120)), 25);
+    }
+  }
+
+  if(n<6){
+    unlock(n+1);
+    setTimeout(()=>{
+      const next=document.querySelector(`#m${n+1}`);
+      if(next) next.scrollIntoView({behavior:'smooth',block:'start'});
+    },900);
+  }else{
+    $('#finalBadge').classList.remove('locked');
+    setTimeout(()=>$('#finalBadge').scrollIntoView({behavior:'smooth'}),700);
+  }
+  return true;
+}
+
+/* Generic MCQ */
+$$('[data-q]').forEach(group=>{
+  group.querySelectorAll('.option').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const id=group.dataset.q,fb=$(`#fb-${id}`);
+      if(btn.dataset.correct==='true'){
+        btn.classList.add('correct');
+        fb.className='feedback show good';fb.textContent='✨ 答对了！先了解原因、用心听和好好沟通，才能减少误会。';
+        if(id==='m1q1'){
+          const newlyDone=finishMission(1,$('#complete1'));
+          if(newlyDone){
+            fb.textContent='✨ 答对了！+100 魔法分，获得 1 颗「沟通宝石」。Mission 2 已解锁！';
+          }
+        }
+        if(id==='m5q1'){
+          const newlyDone=finishMission(5,$('#complete5'));
+          if(newlyDone){
+            fb.textContent='✨ 观察正确！+100 魔法分，获得 1 颗「观察宝石」。Oral Boss Challenge 已解锁！';
+          }
+        }
+      }else{
+        btn.classList.add('wrong');
+        fb.className='feedback show bad';fb.textContent='再想一想：友好相处需要先理解对方，而不是马上生气或离开。你可以再试一次。';
+        setTimeout(()=>btn.classList.remove('wrong'),650)
+      }
+    })
+  })
+});
+
+
+/* Sorting */
+let selectedSort=null, sortedCount=0;
+$$('#sortChoices .choice-chip').forEach(chip=>{
+  chip.onclick=()=>{
+    if(chip.classList.contains('selected'))return;
+    selectedSort=chip;
+    $$('.sort-bin').forEach(b=>b.style.outline='2px solid rgba(224,187,98,.35)');
+    $('#fb-sort').className='feedback show';$('#fb-sort').textContent='现在点击正确的魔法镜。';
+  }
+});
+$$('.sort-bin').forEach(bin=>{
+  bin.onclick=()=>{
+    if(!selectedSort)return;
+    const good=selectedSort.dataset.cat===bin.dataset.bin;
+    const fb=$('#fb-sort');
+    if(good){
+      const item=document.createElement('div');item.className='bin-item';item.textContent='✨ '+selectedSort.textContent.replace(/^[^\s]+\s/,'');
+      bin.querySelector('.bin-list').appendChild(item);
+      selectedSort.classList.add('selected');selectedSort=null;sortedCount++;
+      $$('.sort-bin').forEach(b=>b.style.outline='none');
+      fb.className='feedback show good';fb.textContent='正确！不同习惯和性格会带来不同的生活经历和感受。';
+      if(sortedCount===4){
+        const newlyDone=finishMission(2,$('#complete2'));
+        if(newlyDone){
+          fb.textContent='✨ 全部配对正确！+100 魔法分，获得 1 颗「理解宝石」。Mission 3 已解锁！';
+        }
+      }
+    }else{
+      fb.className='feedback show bad';fb.textContent='这面魔法镜不太合适，再试一次。';
+    }
+  }
+});
+
+
+/* Potion */
+let potionGood=0;
+$$('#potionOptions .option').forEach(btn=>{
+  btn.onclick=()=>{
+    const fb=$('#fb-potion');
+    if(btn.disabled)return;
+    if(btn.dataset.good==='true'){
+      btn.disabled=true;btn.classList.add('correct');potionGood++;
+      $$('#potionMeter .drop')[potionGood-1].classList.add('on');
+      $('#potion').classList.remove('brew');void $('#potion').offsetWidth;$('#potion').classList.add('brew');
+      fb.className='feedback show good';fb.textContent='✨ 正确材料！尊重、倾听、沟通和帮助会让同学关系更和谐。';
+      if(potionGood===4){
+        const newlyDone=finishMission(3,$('#complete3'));
+        if(newlyDone){
+          fb.textContent='🧪 “友好相处药水”完成！+100 魔法分，获得 1 颗「尊重宝石」。Mission 4 已解锁！';
+        }
+      }
+    }else{
+      btn.classList.add('wrong');fb.className='feedback show bad';fb.textContent='这个材料会破坏友谊药水。再选择一个更尊重、关爱同学的做法。';
+      setTimeout(()=>btn.classList.remove('wrong'),650)
+    }
+  }
+});
+
+
+/* Scenario */
+let scenariosPassed=new Set();
+$$('.scenario').forEach((sc,idx)=>{
+  sc.querySelectorAll('.scene-answer').forEach(btn=>{
+    btn.onclick=()=>{
+      const fb=$('#fb-scenes');
+      if(btn.dataset.good==='true'){
+        btn.classList.add('correct');scenariosPassed.add(idx);
+        fb.className='feedback show good';fb.textContent='✨ 很好！先关注同学的感受和需要，再作出体贴的行动。';
+        if(scenariosPassed.size===2){
+          const newlyDone=finishMission(4,$('#complete4'));
+          if(newlyDone){
+            fb.textContent='✨ 两个生活情境都完成！+100 魔法分，获得 1 颗「关爱宝石」。Mission 5 已解锁！';
+          }
+        }
+      }else{
+        btn.classList.add('wrong');fb.className='feedback show bad';fb.textContent='再想一想：这个做法有没有尊重对方的感受和需要？';
+        setTimeout(()=>btn.classList.remove('wrong'),650)
+      }
+    }
+  })
+});
+
+
+/* Fake video */
+let scene='A',videoTimer=null;
+function activeFrames(){return scene==='A'?$$('#framesA .frame'):$$('#framesB .frame')}
+function resetFrames(){activeFrames().forEach((f,i)=>f.classList.toggle('active',i===0))}
+$('#sceneSwitch').onclick=()=>{
+  clearInterval(videoTimer);
+  scene=scene==='A'?'B':'A';
+  $('#framesA').style.display=scene==='A'?'block':'none';
+  $('#framesB').style.display=scene==='B'?'block':'none';
+  $('#sceneLabel').textContent=scene==='A'?'Scene A · 帮助受伤同学':'Scene B · 安慰和帮助同学';
+  $('#sceneSwitch').textContent=scene==='A'?'切换 Scene B':'切换 Scene A';
+  resetFrames()
+};
+$('#playVideo').onclick=()=>{
+  clearInterval(videoTimer);resetFrames();let i=0;const fs=activeFrames();
+  $('#playVideo').textContent='⏸ 播放中...';
+  videoTimer=setInterval(()=>{
+    fs[i].classList.remove('active');i++;
+    if(i>=fs.length){clearInterval(videoTimer);$('#playVideo').textContent='▶ 再播放一次';return}
+    fs[i].classList.add('active')
+  },2200)
+};
+$$('.speak').forEach(btn=>btn.onclick=()=>{
+  if('speechSynthesis' in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(btn.dataset.say);u.lang='zh-CN';u.rate=.78;speechSynthesis.speak(u)}
+});
+
+
+/* Oral */
+$$('.oraltab').forEach(tab=>tab.onclick=()=>{
+  $$('.oraltab').forEach(t=>t.classList.remove('active'));$$('.oral-panel').forEach(p=>p.classList.remove('active'));
+  tab.classList.add('active');$('#'+tab.dataset.tab).classList.add('active')
+});
+let timerInt=null,time=30;
+$('#timerBtn').onclick=()=>{
+  clearInterval(timerInt);time=30;$('#timer').textContent=time;$('#timerBtn').disabled=true;
+  timerInt=setInterval(()=>{time--;$('#timer').textContent=time;if(time<=0){clearInterval(timerInt);$('#timerBtn').disabled=false;$('#timerBtn').textContent='⏳ 再准备 30 秒'}},1000)
+};
+
+/* Recorder */
+let mediaRecorder=null,chunks=[];
+$('#startRec').onclick=async()=>{
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    mediaRecorder=new MediaRecorder(stream);chunks=[];
+    mediaRecorder.ondataavailable=e=>chunks.push(e.data);
+    mediaRecorder.onstop=()=>{
+      const blob=new Blob(chunks,{type:'audio/webm'});const url=URL.createObjectURL(blob);
+      $('#playback').src=url;$('#playback').style.display='block';
+      stream.getTracks().forEach(t=>t.stop());
+      $('#complete6').classList.add('show')
+    };
+    mediaRecorder.start();$('#startRec').classList.add('recording');$('#startRec').textContent='🔴 录音中...';
+    $('#startRec').disabled=true;$('#stopRec').disabled=false
+  }catch(e){alert('无法使用麦克风。请检查浏览器麦克风权限，或继续使用 MQ 和句式练习。');$('#complete6').classList.add('show')}
+};
+$('#stopRec').onclick=()=>{
+  if(mediaRecorder&&mediaRecorder.state!=='inactive')mediaRecorder.stop();
+  $('#startRec').classList.remove('recording');$('#startRec').textContent='🎙️ 再录一次';$('#startRec').disabled=false;$('#stopRec').disabled=true
+};
+$('#complete6').onclick=e=>finishMission(6,e.currentTarget);
+
+/* Music */
+let ctx=null,master=null,musicTimer=null,musicOn=false;
+const notes=[261.63,311.13,392,466.16,523.25];
+function bell(f,t){const o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.022,t+.04);g.gain.exponentialRampToValueAtTime(.0001,t+2.5);o.connect(g);g.connect(master);o.start(t);o.stop(t+2.6)}
+function phrase(){if(!musicOn)return;const t=ctx.currentTime+.05;[0,2,4,3].forEach((n,i)=>bell(notes[n],t+i*1.05));musicTimer=setTimeout(phrase,5700)}
+$('#music').onclick=()=>{
+  if(musicOn){musicOn=false;clearTimeout(musicTimer);$('#music').textContent='♫ 音乐';if(master)master.gain.setTargetAtTime(.0001,ctx.currentTime,.1)}
+  else{ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();master=ctx.createGain();master.gain.value=.20;master.connect(ctx.destination);musicOn=true;$('#music').textContent='♫ 关闭';phrase()}
+};
+
+$('#reset').onclick=()=>{localStorage.removeItem(KEY);location.reload()};
+renderProgress();
+</script>
+</body>
+</html>
