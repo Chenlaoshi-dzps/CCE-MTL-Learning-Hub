@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="zh-SG">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#12081f">
+<title>P5 Values Magic Academy · CCE(MTL)</title>
+<style>
+:root{
+ --ink:#0a0610; --deep:#12081f; --deep2:#1c0e31; --purple:#6d3aae;
+ --violet:#8d5bd0; --amethyst:#b88ae8; --lav:#dfc8f5; --cream:#fff5dc;
+ --soft:#d9c8e6; --gold:#ddb95c; --gold2:#f3d984; --panel:rgba(212,178,239,.075);
+ --line:rgba(221,185,92,.26);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;min-height:100vh;color:var(--cream);
+ font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+ background:
+ radial-gradient(850px 620px at 8% -5%,rgba(115,48,164,.42),transparent 62%),
+ radial-gradient(850px 620px at 98% 20%,rgba(68,30,111,.40),transparent 60%),
+ radial-gradient(700px 600px at 50% 105%,rgba(141,91,208,.28),transparent 60%),
+ linear-gradient(155deg,#090510,var(--deep),#0d0717);
+ overflow-x:hidden;
+}
+body:before{
+ content:"";position:fixed;inset:0;pointer-events:none;opacity:.45;z-index:0;
+ background-image:
+ radial-gradient(circle at 13% 16%,#f3d984 0 1px,transparent 1.4px),
+ radial-gradient(circle at 43% 7%,#dcb7ff 0 1px,transparent 1.4px),
+ radial-gradient(circle at 73% 22%,#f3d984 0 1px,transparent 1.4px),
+ radial-gradient(circle at 92% 52%,#dcb7ff 0 1px,transparent 1.4px),
+ radial-gradient(circle at 22% 79%,#f3d984 0 1px,transparent 1.4px);
+ background-size:270px 250px,320px 290px,350px 310px,300px 280px,340px 320px;
+ animation:stars 20s linear infinite;
+}
+@keyframes stars{50%{transform:translateY(-12px)}}
+.wrap{position:relative;z-index:2;max-width:1160px;margin:auto;padding:18px 18px 80px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.home,.music{
+ border:1px solid var(--line);background:rgba(20,8,35,.74);color:var(--gold2);
+ padding:9px 14px;border-radius:999px;text-decoration:none;font-weight:900;cursor:pointer
+}
+.hero{text-align:center;padding:42px 8px 28px}
+.crystal{
+ width:78px;height:78px;margin:auto;border-radius:50%;display:grid;place-items:center;font-size:42px;
+ border:1px solid rgba(243,217,132,.42);
+ background:radial-gradient(circle,rgba(184,138,232,.30),rgba(109,58,174,.10));
+ box-shadow:0 0 34px rgba(184,138,232,.30),inset 0 0 25px rgba(243,217,132,.08);
+ animation:crystal 4s ease-in-out infinite
+}
+@keyframes crystal{50%{transform:translateY(-8px) rotate(6deg);box-shadow:0 0 48px rgba(184,138,232,.42)}}
+h1{
+ font-size:clamp(38px,7vw,66px);margin:15px 0 4px;line-height:1.04;
+ background:linear-gradient(90deg,var(--gold2),#f8e8ff 35%,var(--amethyst) 68%,var(--gold));
+ background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+ animation:shine 7s linear infinite
+}
+@keyframes shine{50%{background-position:100% 50%}}
+.hero h2{font-size:clamp(23px,4vw,35px);margin:4px 0 13px}
+.hero p{max-width:760px;margin:auto;color:var(--soft);line-height:1.75;font-weight:650}
+.rule{
+ max-width:790px;margin:22px auto 0;padding:13px 17px;border-radius:18px;
+ border:1px solid rgba(243,217,132,.30);background:rgba(109,58,174,.10);color:#f1dc9d;font-weight:900
+}
+
+.lobby{margin-top:30px}
+.lobby-title{text-align:center;margin-bottom:20px}
+.lobby-title h2{font-size:30px;margin:0 0 6px}
+.lobby-title p{margin:0;color:var(--soft)}
+.portal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.theme-portal{
+ position:relative;min-height:330px;border-radius:28px;padding:25px 21px;
+ color:var(--cream);text-align:center;cursor:pointer;
+ border:1px solid rgba(221,185,92,.31);
+ background:
+ radial-gradient(circle at 50% 20%,rgba(184,138,232,.18),transparent 34%),
+ linear-gradient(160deg,rgba(125,71,185,.18),rgba(29,12,49,.76));
+ box-shadow:0 15px 38px rgba(0,0,0,.34),inset 0 0 40px rgba(184,138,232,.025);
+ transition:transform .25s,box-shadow .25s,border-color .25s;
+}
+.theme-portal:hover{transform:translateY(-8px);box-shadow:0 20px 48px rgba(87,40,131,.45),0 0 30px rgba(184,138,232,.15);border-color:var(--gold)}
+.portal-ring{
+ width:100px;height:100px;border-radius:50%;display:grid;place-items:center;margin:3px auto 17px;
+ border:1px solid rgba(243,217,132,.42);box-shadow:0 0 28px rgba(184,138,232,.20);
+ background:radial-gradient(circle,rgba(184,138,232,.25),rgba(33,14,54,.55));
+ animation:portal 5s ease-in-out infinite
+}
+.theme-portal:nth-child(2) .portal-ring{animation-delay:-1.5s}
+.theme-portal:nth-child(3) .portal-ring{animation-delay:-3s}
+@keyframes portal{50%{transform:scale(1.05) rotate(3deg);box-shadow:0 0 40px rgba(184,138,232,.32)}}
+.portal-icon{font-size:47px}
+.portal-kicker{display:block;color:var(--gold2);font-size:12px;letter-spacing:.13em;font-weight:950}
+.theme-portal strong{display:block;font-size:25px;margin:8px 0}
+.portal-time{display:block;color:#dfc8f5;font-size:13px}
+.portal-units{display:block;color:var(--soft);font-size:12px;line-height:1.55;margin:13px 0 17px}
+.enter{display:inline-block;background:var(--gold);color:#1a0e27;padding:9px 15px;border-radius:999px;font-weight:950}
+
+.theme-world{display:none;animation:worldIn .6s cubic-bezier(.2,.8,.2,1) both;margin-top:22px}
+.theme-world.active{display:block}
+@keyframes worldIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.lobby.hidden{display:none}
+.world-head{display:flex;align-items:center;gap:18px;padding:18px 0 17px;border-bottom:1px solid var(--line);position:relative}
+.return-btn{
+ position:absolute;right:0;top:18px;border:1px solid var(--line);background:rgba(109,58,174,.10);color:var(--gold2);
+ border-radius:999px;padding:8px 12px;font-weight:900;cursor:pointer
+}
+.world-seal{width:67px;height:67px;border-radius:19px;display:grid;place-items:center;font-size:34px;border:1px solid var(--line);background:rgba(109,58,174,.12)}
+.world-kicker{color:var(--gold2);font-size:12px;letter-spacing:.12em;font-weight:950}
+.world-head h2{font-size:30px;margin:3px 0 2px}
+.world-head p{margin:0;color:var(--soft)}
+
+.term-path{margin:22px 0 24px;padding:15px 18px;border:1px solid rgba(184,138,232,.20);border-radius:18px;background:rgba(184,138,232,.055)}
+.path-label{display:block;color:var(--gold2);font-weight:950;font-size:13px;margin-bottom:10px}
+.path-line{display:flex;gap:10px;flex-wrap:wrap}
+.path-stop{padding:7px 11px;border-radius:999px;background:rgba(109,58,174,.19);border:1px solid rgba(184,138,232,.20);font-weight:850;color:#ead9f8}
+
+.unit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:21px}
+.unit-card{height:505px;perspective:1400px;cursor:pointer;outline:none}
+.unit-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .75s cubic-bezier(.2,.8,.2,1)}
+.unit-card.flipped .unit-inner{transform:rotateY(180deg)}
+.unit-face{
+ position:absolute;inset:0;border-radius:25px;backface-visibility:hidden;overflow:hidden;
+ border:1px solid rgba(221,185,92,.30);
+ box-shadow:0 14px 36px rgba(0,0,0,.34),0 0 22px rgba(141,91,208,.08)
+}
+.unit-front{
+ padding:22px;display:flex;flex-direction:column;align-items:center;text-align:center;
+ background:
+ radial-gradient(circle at 50% 17%,rgba(184,138,232,.20),transparent 32%),
+ linear-gradient(160deg,rgba(119,65,175,.20),rgba(18,8,31,.90));
+}
+.unit-card:hover .unit-front{box-shadow:inset 0 0 45px rgba(184,138,232,.08)}
+.corner-spark{position:absolute;color:var(--gold2);animation:twinkle 3s ease-in-out infinite}
+.s1{top:14px;left:17px}.s2{right:18px;bottom:16px;animation-delay:1.2s}
+@keyframes twinkle{50%{opacity:.25;transform:scale(.7) rotate(20deg)}}
+.topline{display:flex;width:100%;justify-content:space-between;align-items:center;gap:8px;color:var(--gold2);font-size:12px;font-weight:950}
+.term{border:1px solid rgba(221,185,92,.22);padding:5px 8px;border-radius:999px;color:var(--soft);font-weight:800}
+.unit-icon{font-size:65px;margin:31px 0 9px;filter:drop-shadow(0 0 13px rgba(184,138,232,.24))}
+.unit-front h3{font-size:29px;margin:3px 0 9px}
+.lesson{font-size:14px;color:var(--soft);margin-bottom:10px}
+.gems{display:flex;justify-content:center;gap:7px;flex-wrap:wrap}
+.gem{font-size:12px;border:1px solid rgba(221,185,92,.18);background:rgba(221,185,92,.07);padding:6px 8px;border-radius:999px}
+.spell-line{margin-top:auto;color:#d8c0ec;font-size:13px}
+.flip-btn{margin-top:10px;border:0;border-radius:999px;background:var(--gold);color:#1b0e29;padding:9px 17px;font-weight:950;cursor:pointer}
+
+.unit-back{
+ transform:rotateY(180deg);overflow-y:auto;padding:21px;
+ background:linear-gradient(rgba(24,12,39,.97),rgba(14,8,24,.98));
+}
+.scroll-title{color:var(--gold2);font-size:12px;letter-spacing:.12em;font-weight:950}
+.unit-back h3{font-size:22px;color:#f1dda4;margin:8px 0 14px}
+.meta{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid rgba(221,185,92,.12);font-size:13px}
+.meta span{color:var(--soft)}.meta b{text-align:right}
+.info{margin-top:13px;padding:11px 12px;border-radius:14px;border:1px solid rgba(184,138,232,.13);background:rgba(184,138,232,.035)}
+.info h4{margin:0 0 7px;color:var(--gold2);font-size:14px}
+.info ul{margin:0;padding-left:18px}.info li,.info p{font-size:12.5px;line-height:1.55;color:#eee2f6;margin:4px 0}
+.back-btn,.mission-btn{width:100%;margin-top:11px;padding:8px;border-radius:999px;font-weight:900}
+.back-btn{border:1px solid rgba(221,185,92,.24);background:rgba(221,185,92,.07);color:var(--gold2);cursor:pointer}
+.mission-btn{border:1px solid rgba(184,138,232,.14);background:rgba(184,138,232,.07);color:#8f7b9f}
+
+.float{position:fixed;z-index:1;opacity:.22;font-size:28px;pointer-events:none;animation:drift 8s ease-in-out infinite}
+.f1{left:4%;top:24%}.f2{right:5%;top:16%;animation-delay:-2s}.f3{left:6%;bottom:13%;animation-delay:-4s}.f4{right:8%;bottom:20%;animation-delay:-6s}
+@keyframes drift{50%{transform:translateY(-18px) rotate(8deg)}}
+.spark{position:fixed;z-index:999;pointer-events:none;color:var(--gold2);animation:burst .9s ease-out forwards}
+@keyframes burst{to{opacity:0;transform:translate(var(--x),var(--y)) scale(1.5) rotate(130deg)}}
+
+@media(max-width:920px){.portal-grid,.unit-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){
+ .portal-grid,.unit-grid{grid-template-columns:1fr}
+ .wrap{padding-left:14px;padding-right:14px}
+ .world-head{padding-top:58px}.return-btn{left:0;right:auto;top:10px}
+ .unit-card{height:510px}
+}
+@media(prefers-reduced-motion:reduce){
+ body:before,.crystal,h1,.portal-ring,.corner-spark,.float{animation:none}
+ .unit-inner{transition:none}
+}
+</style>
+</head>
+<body>
+<span class="float f1">🪄</span><span class="float f2">🔮</span><span class="float f3">🌙</span><span class="float f4">✨</span>
+<div class="wrap">
+ <div class="top">
+   <a class="home" href="../index.html">← 返回首页</a>
+   <button class="music" id="music">♫ 开启魔法音乐</button>
+ </div>
+ <header class="hero">
+   <div class="crystal">💜</div>
+   <h1>P5 Values Magic Academy</h1>
+   <h2>小五 · 紫晶魔法学院</h2>
+   <p>先选择一个 CCE Theme，再进入这个 Theme 里的 Unit 魔法牌。点击 Unit 魔法牌，就能查看学习时间、学习目标、发展里程碑和 CCE 核心价值观。</p>
+   <div class="rule">🪄 Theme → Term → Unit → 学习重点 → 单元魔法任务</div>
+ </header>
+
+ <main>
+   <section class="lobby" id="lobby">
+    <div class="lobby-title"><h2>🔮 Theme 魔法大厅</h2><p>请选择你要学习的 Theme。</p></div>
+    <div class="portal-grid">
+    <button class="theme-portal" data-theme-target="1" type="button">
+      <span class="portal-ring"><span class="portal-icon">🪞</span></span>
+      <span class="portal-kicker">Theme 1</span>
+      <strong>了解和关爱自己</strong>
+      <span class="portal-time">⏳ Term 1</span>
+      <span class="portal-units">U1《我要做得最好》 · U2《追求我的兴趣》</span>
+      <span class="enter">进入 Theme 1 →</span>
+    </button>
+    <button class="theme-portal" data-theme-target="2" type="button">
+      <span class="portal-ring"><span class="portal-icon">🛡️</span></span>
+      <span class="portal-kicker">Theme 2</span>
+      <strong>我会尽力做到做好</strong>
+      <span class="portal-time">⏳ Term 1 · Term 2</span>
+      <span class="portal-units">U3《我相信我可以》 · U4《如果你是我》 · U5《左右两难》</span>
+      <span class="enter">进入 Theme 2 →</span>
+    </button>
+    <button class="theme-portal" data-theme-target="3" type="button">
+      <span class="portal-ring"><span class="portal-icon">🤝</span></span>
+      <span class="portal-kicker">Theme 3</span>
+      <strong>关爱和尊重他人</strong>
+      <span class="portal-time">⏳ Term 3 · Term 4</span>
+      <span class="portal-units">U6《感谢有你》 · U7《我们的生活经历》 · U8《勇敢的心》 · U9《我们的故事》</span>
+      <span class="enter">进入 Theme 3 →</span>
+    </button></div>
+   </section>
+   
+    <section class="theme-world" id="theme-1" data-theme-world="1">
+      <div class="world-head">
+        <button class="return-btn" type="button">← 返回 Theme 大厅</button>
+        <div class="world-seal">🪞</div>
+        <div>
+          <span class="world-kicker">Theme 1</span>
+          <h2>了解和关爱自己</h2>
+          <p>学习时间：Term 1</p>
+        </div>
+      </div>
+      <div class="term-path">
+        <span class="path-label">魔法学习路线</span>
+        <div class="path-line">
+          <span class="path-stop">✦ Term 1</span>
+        </div>
+      </div>
+      <div class="unit-grid">
+        
+        <article class="unit-card" data-unit="1" tabindex="0">
+          <div class="unit-inner">
+            <div class="unit-face unit-front">
+              <div class="corner-spark s1">✦</div><div class="corner-spark s2">✧</div>
+              <div class="topline"><span>UNIT 1</span><span class="term">⏳ Term 1</span></div>
+              <div class="unit-icon">🏆</div>
+              <h3>我要做得最好</h3>
+              <div class="lesson">📚 3 Lessons</div>
+              <div class="gems"><span class="gem">💎 负责任</span><span class="gem">💎 诚实</span></div>
+              <div class="spell-line">点击魔法牌查看学习重点</div>
+              <button class="flip-btn" type="button">🪄 翻开</button>
+            </div>
+            <div class="unit-face unit-back">
+              <div class="scroll-title">✦ 学习卷轴 ✦</div>
+              <h3>Unit 1 · 我要做得最好</h3>
+              <div class="meta"><span>⏳ 学习时间</span><b>Term 1</b></div>
+              <div class="meta"><span>🧙 Theme</span><b>了解和关爱自己</b></div>
+              <div class="info">
+                <h4>🎯 学习目标</h4>
+                <ul><li>学生明白在实现最好的自己的过程中,优良价值观扮演着重要的角色。</li><li>学生知道他们可以采取行动,成为最好的自己。</li></ul>
+              </div>
+              <div class="info">
+                <h4>🧭 Developmental Milestone</h4>
+                <ul><li>1.1.3b 明白我们可以采取行动,培养好习惯,做最好的自己。</li></ul>
+              </div>
+              <div class="info">
+                <h4>💎 CCE Core Values</h4>
+                <p>负责任 (Responsibility) · 诚实 (Integrity)</p>
+              </div>
+              <button class="back-btn" type="button">↩ 翻回正面</button>
+              <button class="mission-btn" type="button" disabled>🔐 单元魔法任务 · 即将解锁</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="unit-card" data-unit="2" tabindex="0">
+          <div class="unit-inner">
+            <div class="unit-face unit-front">
+              <div class="corner-spark s1">✦</div><div class="corner-spark s2">✧</div>
+              <div class="topline"><span>UNIT 2</span><span class="term">⏳ Term 1</span></div>
+              <div class="unit-icon">🔭</div>
+              <h3>追求我的兴趣</h3>
+              <div class="lesson">📚 3 Lessons</div>
+              <div class="gems"><span class="gem">💎 韧性</span><span class="gem">💎 负责</span></div>
+              <div class="spell-line">点击魔法牌查看学习重点</div>
+              <button class="flip-btn" type="button">🪄 翻开</button>
+            </div>
+            <div class="unit-face unit-back">
+              <div class="scroll-title">✦ 学习卷轴 ✦</div>
+              <h3>Unit 2 · 追求我的兴趣</h3>
+              <div class="meta"><span>⏳ 学习时间</span><b>Term 1</b></div>
+              <div class="meta"><span>🧙 Theme</span><b>了解和关爱自己</b></div>
+              <div class="info">
+                <h4>🎯 学习目标</h4>
+                <ul><li>学生明白每个人都有不同的兴趣,而这会影响个人的梦想和志向。</li><li>学生明白每个人的不同兴趣会影响个人的梦想和志向,并知道实现梦想和志向的过程需要投入时间和付出努力,以及身边的人的支持。</li><li>学生明白学习新事物时保持开明的态度,能发现更多探索兴趣的机会。</li></ul>
+              </div>
+              <div class="info">
+                <h4>🧭 Developmental Milestone</h4>
+                <ul><li>1.3.3a 发展自己的兴趣和爱好,并探讨如何使自己的人生 充实而富有意义。</li></ul>
+              </div>
+              <div class="info">
+                <h4>💎 CCE Core Values</h4>
+                <p>韧性 (Resilience) · 负责 (Responsibility)</p>
+              </div>
+              <button class="back-btn" type="button">↩ 翻回正面</button>
+              <button class="mission-btn" type="button" disabled>🔐 单元魔法任务 · 即将解锁</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="theme-world" id="theme-2" data-theme-world="2">
+      <div class="world-head">
+        <button class="return-btn" type="button">← 返回 Theme 大厅</button>
+        <div class="world-seal">🛡️</div>
+        <div>
+          <span class="world-kicker">Theme 2</span>
+          <h2>我会尽力做到做好</h2>
+          <p>学习时间：Term 1 · Term 2</p>
+        </div>
+      </div>
+      <div class="term-path">
+        <span class="path-label">魔法学习路线</span>
+        <div class="path-line">
+          <span class="path-stop">✦ Term 1</span><span class="path-stop">✦ Term 2</span>
+        </div>
+      </div>
+      <div class="unit-grid">
+        
+        <article class="unit-card" data-unit="3" tabindex="0">
+          <div class="unit-inner">
+            <div class="unit-face unit-front">
+              <div class="corner-spark s1">✦</div><div class="corner-spark s2">✧</div>
+              <div class="topline"><span>UNIT 3</span><span class="term">⏳ Term 1 / Term 2</span></div>
+              <div class="unit-icon">🔥</div>
+              <h3>我相信我可以</h3>
+              <div class="lesson">📚 3 Lessons</div>
+              <div class="gems"><span class="gem">💎 韧性</span></div>
+              <div class="spell-line">点击魔法牌查看学习重点</div>
+              <button class="flip-btn" type="button">🪄 翻开</button>
+            </div>
+            <div class="unit-face unit-back">
+              <div class="scroll-title">✦ 学习卷轴 ✦</div>
+              <h3>Unit 3 · 我相信我可以</h3>
+              <div class="meta"><span>⏳ 学习时间</span><b>Term 1 / Term 2</b></div>
+              <div class="meta"><span>🧙 Theme</span><b>我会尽力做到做好</b></div>
+              <div class="info">
+                <h4>🎯 学习目标</h4>
+                <ul><li>学生明白在面对挑战时,发挥坚毅不屈的精神的重要性。</li><li>学生学习改变思考的角度,把挑战视为学习的机会。</li><li>学生了解在面对挑战时,自我照顾的重要性。</li></ul>
+              </div>
+              <div class="info">
+                <h4>🧭 Developmental Milestone</h4>
+                <ul><li>1.3.3b 积极应对挑战。</li></ul>
+              </div>
+              <div class="info">
+                <h4>💎 CCE Core Values</h4>
+                <p>韧性 (Resilience)</p>
+              </div>
+              <button class="back-btn" type="button">↩ 翻回正面</button>
+              <button class="mission-btn" type="button" disabled>🔐 单元魔法任务 · 即将解锁</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="unit-card" data-unit="4" tabindex="0">
+          <div class="unit-inner">
+            <div class="unit-face unit-front">
+              <div class="corner-spark s1">✦</div><div class="corner-spark s2">✧</div>
+              <div class="topline"><span>UNIT 4</span><span class="term">⏳ Term 2</span></div>
+              <div class="unit-icon">👁️</div>
+              <h3>如果你是我</h3>
+              <div class="lesson">📚 3 Lessons</div>
+              <div class="gems"><span class="gem">💎 尊重</span><span class="gem">💎 关爱</span></div>
+              <div class="spell-line">点击魔法牌查看学习重点</div>
+              <button class="flip-btn" type="button">🪄 翻开</button>
+            </div>
+            <div class="unit-face unit-back">
+              <div class="scroll-title">✦ 学习卷轴 ✦</div>
+              <h3>Unit 4 · 如果你是我</h3>
+              <div class="meta"><span>⏳ 学习时间</span><b>Term 2</b></div>
+              <div class="meta"><span>🧙 Theme</span><b>我会尽力做到做好</b></div>
+              <div class="info">
+                <h4>🎯 学习目标</h4>
+                <ul><li>学生明白假设的定义及假设对个人的看法的影响。</li><li>学生明白在得出看法时,以公平的心态查证假设的正确性是重要的。</li><li>学生明白在做出决定或得出看法时,实现同理心及积极聆听(包括聆听与自己想法相反的观点)的重要性,因为这能让他们以公平的心态对待自己和他人。</li></ul>
+              </div>
+              <div class="info">
+                <h4>🧭 Developmental Milestone</h4>
+                <ul><li>3.1.3b 在做出决定或得出看法时,从他人的角度进行思考, 明白他人的感受,以了解对方的看法。</li></ul>
+              </div>
+              <div class="info">
+                <h4>💎 CCE Core Values</h4>
+                <p>尊重 (Respect) · 关爱 (Care)</p>
+              </div>
+              <button class="back-btn" type="button">↩ 翻回正面</button>
+              <button class="mission-btn" type="button" disabled>🔐 单元魔法任务 · 即将解锁</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="unit-card" data-unit="5" tabindex="0">
+          <div class="unit-inner">
+            <div class="unit-face unit-front">
+              <div class="corner-spark s1">✦</div><div class="corner-spark s2">✧</div>
+              <div class="topline"><span>UNIT 5</span><span class="term">⏳ Term 2</span></div>
+              <div class="unit-icon">⚖️</div>
+              <h3>左右两难</h3>
+              <div class="lesson">📚 3 Lessons</div>
+              <div class="gems"><span class="gem">💎 诚实</span><span class="gem">💎 负责</span></div>
+              <div class="spell-line">点击魔法牌查看学习重点</div>
+              <button class="flip-btn" type="button">🪄 翻开</button>
+            </div>
+            <div class="unit-face unit-back">
+              <div class="scroll-title">✦ 学习卷轴 ✦</div>
+              <h3>Unit 5 · 左右两难</h3>
+              <div class="meta"><span>⏳ 学习时间</span><b>Term 2</b></div>
+              <div class="meta"><span>🧙 Theme</span><b>我会尽力做到做好</b></div>
+              <div class="info">
+                <h4>🎯 学习目标</h4>
+                <ul><li>学生了解两难困境中的道德问题以及影响选择的原因。</li><li>学生明白在面对两难困境时,要以负责任的方式做出选择。</li></ul>
+              </div>
+              <div class="info">
+                <h4>🧭 Developmental Milestone</h4>
+                <ul><li>3.1.3a 衡量个人的决定和行动对自己和他人的影响。在处理 两难的困境时,明白做出以价值观为依据的决定的重要性。</li></ul>
+              </div>
+              <div class="info">
+                <h4>💎 CCE Core Values</h4>
+                <p>诚实 (Integrity) · 负责 (Responsibility)</p>
+              </div>
+              <button class="back-btn" type="button">↩ 翻回正面</button>
+              <button class="mission-btn" type="button" disabled>🔐 单元魔法任务 · 即将解锁</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="theme-world" id="theme-3" data-theme-world="3">
+      <div class="world-head">
+        <button class="return-btn" type="button">← 返回 Theme 大厅</button>
+        <div class="world-seal">🤝</div>
+        <div>
+          <span class="world-kicker">Theme 3</span>
+          <h2>关爱和尊重他人</h2>
+          <p>学习时间：Term 3 · Term 4</p>
+        </div>
+      </div>
+      <div class="term-path">
+        <span class="path-label">魔法学习路线</span>
+        <div class="path-line">
+          <span class="path-stop">✦ Term 3</span><span class="path-stop">✦ Term 4</span>
+        </div>
+      </div>
+      <div class="unit-grid">
+        
+        <article class="unit-card" data-unit="6" tabindex="0">
+          <div class="unit-inner">
+            <div class="unit-face unit-front">
+              <div class="corner-spark s1">✦</div><div class="corner-spark s2">✧</div>
+              <div class="topline"><span>UNIT 6</span><span class="term">⏳ Term 3</span></div>
+              <div class="unit-icon">💌</div>
+              <h3>感谢有你</h3>
+              <div class="lesson">📚 3 Lessons</div>
+              <div class="gems"><span class="gem">💎 关爱</span><span class="gem">💎 尊重</span></div>
+              <div class="spell-line">点击魔法牌查看学习重点</div>
+              <button class="flip-btn" type="button">🪄 翻开</button>
+            </div>
+            <div class="unit-face unit-back">
+              <div class="scroll-title">✦ 学习卷轴 ✦</div>
+              <h3>Unit 6 · 感谢有你</h3>
+              <div class="meta"><span>⏳ 学习时间</span><b>Term 3</b></div>
+              <div class="meta"><span>🧙 Theme</span><b>关爱和尊重他人</b></div>
+              <div class="info">
+                <h4>🎯 学习目标</h4>
+                <ul><li>学生明白父母或监护人在他们的成长和身心健康发展中所扮演的角色,并学习向家长表示感谢的方法。</li><li>学生学习长大后向家长或监护人表示感谢的方法。</li><li>学生明白邻居之间促进彼此身心健康的方法,并了解与邻居建立良好关系的重要性。</li></ul>
+              </div>
+              <div class="info">
+                <h4>🧭 Developmental Milestone</h4>
+                <ul><li>2.1.3a 重视家人、朋友和其他人,对他们表达感激。培养以 尊重的态度进行沟通的能力,从而与他人建立良好的 关系。</li></ul>
+              </div>
+              <div class="info">
+                <h4>💎 CCE Core Values</h4>
+                <p>关爱 (Care) · 尊重 (Respect)</p>
+              </div>
+              <button class="back-btn" type="button">↩ 翻回正面</button>
+              <button class="mission-btn" type="button" disabled>🔐 单元魔法任务 · 即将解锁</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="unit-card" data-unit="7" tabindex="0">
+          <div class="unit-inner">
+            <div class="unit-face unit-front">
+              <div class="corner-spark s1">✦</div><div class="corner-spark s2">✧</div>
+              <div class="topline"><span>UNIT 7</span><span class="term">⏳ Term 3</span></div>
+              <div class="unit-icon">🧭</div>
+              <h3>我们的生活经历</h3>
+              <div class="lesson">📚 3 Lessons</div>
+              <div class="gems"><span class="gem">💎 和谐</span><span class="gem">💎 尊重</span></div>
+              <div class="spell-line">点击魔法牌查看学习重点</div>
+              <button class="flip-btn" type="button">🪄 翻开</button>
+            </div>
+            <div class="unit-face unit-back">
+              <div class="scroll-title">✦ 学习卷轴 ✦</div>
+              <h3>Unit 7 · 我们的生活经历</h3>
+              <div class="meta"><span>⏳ 学习时间</span><b>Term 3</b></div>
+              <div class="meta"><span>🧙 Theme</span><b>关爱和尊重他人</b></div>
+              <div class="info">
+                <h4>🎯 学习目标</h4>
+                <ul><li>学生了解大家都有不同的生活经历。</li><li>学生明白努力对他人的生活经历和观点保持敏感度的重要性。</li><li>学生学习与拥有不同生活经历和观点的人交流的方法。</li></ul>
+              </div>
+              <div class="info">
+                <h4>🧭 Developmental Milestone</h4>
+                <ul><li>2.2.3b 关注他人的感受,尊重他人的想法。</li></ul>
+              </div>
+              <div class="info">
+                <h4>💎 CCE Core Values</h4>
+                <p>和谐 (Harmony) · 尊重 (Respect)</p>
+              </div>
+              <button class="back-btn" type="button">↩ 翻回正面</button>
+              <button class="mission-btn" type="button" disabled>🔐 单元魔法任务 · 即将解锁</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="unit-card" data-unit="8" tabindex="0">
+          <div class="unit-inner">
+            <div class="unit-face unit-front">
+              <div class="corner-spark s1">✦</div><div class="corner-spark s2">✧</div>
+              <div class="topline"><span>UNIT 8</span><span class="term">⏳ Term 4</span></div>
+              <div class="unit-icon">🕯️</div>
+              <h3>勇敢的心</h3>
+              <div class="lesson">📚 3 Lessons</div>
+              <div class="gems"><span class="gem">💎 负责</span><span class="gem">💎 诚实</span></div>
+              <div class="spell-line">点击魔法牌查看学习重点</div>
+              <button class="flip-btn" type="button">🪄 翻开</button>
+            </div>
+            <div class="unit-face unit-back">
+              <div class="scroll-title">✦ 学习卷轴 ✦</div>
+              <h3>Unit 8 · 勇敢的心</h3>
+              <div class="meta"><span>⏳ 学习时间</span><b>Term 4</b></div>
+              <div class="meta"><span>🧙 Theme</span><b>关爱和尊重他人</b></div>
+              <div class="info">
+                <h4>🎯 学习目标</h4>
+                <ul><li>学生明白道德行为是采取以价值观为依据的行动。</li><li>学生知道负面的同侪压力及其结果。</li><li>学生学习应对负面同侪影响的方法,并选择做正确的事。</li></ul>
+              </div>
+              <div class="info">
+                <h4>🧭 Developmental Milestone</h4>
+                <ul><li>2.1.3b 认识同侪影响的力量。建立自信心以应对来自同侪 的压力。</li></ul>
+              </div>
+              <div class="info">
+                <h4>💎 CCE Core Values</h4>
+                <p>负责 (Responsibility) · 诚实 (Integrity)</p>
+              </div>
+              <button class="back-btn" type="button">↩ 翻回正面</button>
+              <button class="mission-btn" type="button" disabled>🔐 单元魔法任务 · 即将解锁</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="unit-card" data-unit="9" tabindex="0">
+          <div class="unit-inner">
+            <div class="unit-face unit-front">
+              <div class="corner-spark s1">✦</div><div class="corner-spark s2">✧</div>
+              <div class="topline"><span>UNIT 9</span><span class="term">⏳ Term 4</span></div>
+              <div class="unit-icon">📜</div>
+              <h3>我们的故事</h3>
+              <div class="lesson">📚 4 Lessons</div>
+              <div class="gems"><span class="gem">💎 韧性</span></div>
+              <div class="spell-line">点击魔法牌查看学习重点</div>
+              <button class="flip-btn" type="button">🪄 翻开</button>
+            </div>
+            <div class="unit-face unit-back">
+              <div class="scroll-title">✦ 学习卷轴 ✦</div>
+              <h3>Unit 9 · 我们的故事</h3>
+              <div class="meta"><span>⏳ 学习时间</span><b>Term 4</b></div>
+              <div class="meta"><span>🧙 Theme</span><b>关爱和尊重他人</b></div>
+              <div class="info">
+                <h4>🎯 学习目标</h4>
+                <ul><li>学生能探索与价值观“坚毅不屈”相关的学习要点。</li><li>学生能创作一个故事来传达与主题(坚毅不屈)相关的学习要点。</li><li>学生能根据反馈,优化故事。</li><li>学生能分享故事并就自身的学习经历进行反思。</li></ul>
+              </div>
+              <div class="info">
+                <h4>🧭 Developmental Milestone</h4>
+                <ul><li>1.3.3b 积极应对挑战。</li></ul>
+              </div>
+              <div class="info">
+                <h4>💎 CCE Core Values</h4>
+                <p>韧性 (Resilience)</p>
+              </div>
+              <button class="back-btn" type="button">↩ 翻回正面</button>
+              <button class="mission-btn" type="button" disabled>🔐 单元魔法任务 · 即将解锁</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+ </main>
+</div>
+<script>
+const lobby=document.getElementById('lobby');
+document.querySelectorAll('.theme-portal').forEach(btn=>{
+ btn.addEventListener('click',e=>{
+   const n=btn.dataset.themeTarget;
+   lobby.classList.add('hidden');
+   document.querySelectorAll('.theme-world').forEach(w=>w.classList.remove('active'));
+   document.querySelector(`[data-theme-world="${n}"]`).classList.add('active');
+   window.scrollTo({top:0,behavior:'smooth'});
+   burst(e.clientX,e.clientY,18);
+ });
+});
+document.querySelectorAll('.return-btn').forEach(btn=>btn.addEventListener('click',()=>{
+ document.querySelectorAll('.theme-world').forEach(w=>w.classList.remove('active'));
+ lobby.classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'});
+}));
+
+document.querySelectorAll('.unit-card').forEach(card=>{
+ const flip=()=>card.classList.toggle('flipped');
+ card.addEventListener('click',e=>{if(!e.target.closest('button')) flip()});
+ card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();flip()}});
+ card.querySelector('.flip-btn').addEventListener('click',e=>{e.stopPropagation();card.classList.add('flipped');burst(e.clientX,e.clientY,12)});
+ card.querySelector('.back-btn').addEventListener('click',e=>{e.stopPropagation();card.classList.remove('flipped')});
+});
+
+function burst(x,y,count=12){
+ for(let i=0;i<count;i++){
+  const s=document.createElement('span');s.className='spark';s.textContent=Math.random()>.5?'✦':'·';
+  s.style.left=x+'px';s.style.top=y+'px';
+  const a=Math.random()*Math.PI*2,d=25+Math.random()*55;
+  s.style.setProperty('--x',Math.cos(a)*d+'px');s.style.setProperty('--y',Math.sin(a)*d+'px');
+  document.body.appendChild(s);setTimeout(()=>s.remove(),1000);
+ }
+}
+
+// copyright-safe procedural magical chimes
+let ctx=null,master=null,timer=null,on=false;
+const music=document.getElementById('music'),notes=[261.63,311.13,392,466.16,523.25];
+function bell(f,t){
+ const o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.value=f;
+ g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.027,t+.04);g.gain.exponentialRampToValueAtTime(.0001,t+2.7);
+ o.connect(g);g.connect(master);o.start(t);o.stop(t+2.8)
+}
+function phrase(){if(!on)return;const t=ctx.currentTime+.05;[0,2,4,3].forEach((n,i)=>bell(notes[n],t+i*1.05));timer=setTimeout(phrase,5700)}
+music.addEventListener('click',()=>{
+ if(on){on=false;clearTimeout(timer);music.textContent='♫ 开启魔法音乐';if(master)master.gain.setTargetAtTime(.0001,ctx.currentTime,.1)}
+ else{ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();master=ctx.createGain();master.gain.value=.22;master.connect(ctx.destination);on=true;music.textContent='♫ 关闭魔法音乐';phrase()}
+});
+</script>
+</body>
+</html>
