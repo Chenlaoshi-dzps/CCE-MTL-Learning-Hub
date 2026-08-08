@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-SG">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CCE(MTL) Learning Hub</title>
+<style>
+:root{--b:#0f766e;--bs:#ecfdf5;--a:#f59e0b;--bg:#f6f8fb;--c:#fff;--t:#1f2937;--m:#667085;--l:#e5e7eb;--g:#15803d;--r:#b91c1c}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--t)}
+header{background:linear-gradient(135deg,#0f766e,#14b8a6);color:#fff;padding:34px 18px 42px}.wrap,main{max-width:1100px;margin:auto}.ey{font-weight:800;opacity:.9}h1{font-size:clamp(34px,6vw,62px);margin:6px 0 12px}.hero{font-size:18px;line-height:1.65;max-width:850px}
+nav{position:sticky;top:0;z-index:5;background:#fffffff2;border-bottom:1px solid var(--l);backdrop-filter:blur(10px)}.nav{max-width:1100px;margin:auto;display:flex;gap:8px;overflow:auto;padding:10px 14px}.nav button,.tabs button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;white-space:nowrap}.nav button.active{background:var(--b);color:#fff}.tabs button{border:1px solid var(--l);background:#fff}.tabs button.active{background:var(--bs);color:var(--b);border-color:var(--b)}
+main{padding:26px 16px 60px}.panel,.level{display:none}.panel.active,.level.active{display:block}h2{font-size:30px;margin:0 0 8px}.lead{color:var(--m);line-height:1.7}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:15px}.card{background:#fff;border:1px solid var(--l);border-radius:18px;padding:18px;box-shadow:0 8px 25px #0f172a0d}.badge{display:inline-block;background:var(--bs);color:var(--b);padding:6px 9px;border-radius:999px;font-size:13px;font-weight:900}.flow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:20px 0}.flow span{background:#fff;border:1px solid var(--l);padding:10px 12px;border-radius:12px;font-weight:800}.arrow{color:#98a2b3}
+.value{font-size:24px;font-weight:900}.py,.small{color:var(--m);font-size:14px}.scaf{background:#fffbeb;border-left:5px solid var(--a);padding:13px 15px;border-radius:0 12px 12px 0;line-height:1.8;margin:10px 0}.oralq{font-size:21px;font-weight:900;margin:24px 0 8px}.mq{display:grid;gap:8px}.mq label{background:#fff;border:1px solid var(--l);padding:11px;border-radius:11px}
+.vocabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:11px}.vocab{background:#fff;border:1px solid var(--l);border-radius:14px;padding:14px}.vtop{display:flex;justify-content:space-between;align-items:center}.zh{font-size:21px;font-weight:900}.spk{border:0;background:var(--bs);width:42px;height:42px;border-radius:50%;font-size:20px}.tag{display:inline-block;margin-top:7px;padding:4px 7px;background:#f2f4f7;border-radius:999px;font-size:12px;font-weight:800}
+.choice,.match{width:100%;text-align:left;border:1px solid var(--l);background:#fff;padding:12px;border-radius:11px;margin:7px 0}.choice.good,.match.good{background:#ecfdf3;border-color:#86efac}.choice.bad,.match.bad{background:#fef2f2;border-color:#fca5a5}.feedback{min-height:24px;font-weight:800}.fg{color:var(--g)}.fr{color:var(--r)}
+.matchgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.match.sel{outline:3px solid #14b8a644}.timerbox{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:15px}.primary{border:0;background:var(--b);color:#fff;border-radius:10px;padding:10px 14px;font-weight:900}.timer{font-size:27px;font-weight:900}.progress{height:10px;background:#e5e7eb;border-radius:999px;overflow:hidden}.bar{height:100%;width:0;background:#14b8a6}
+footer{text-align:center;padding:26px 16px;background:#fff;border-top:1px solid var(--l);color:var(--m)}@media(max-width:650px){.matchgrid{grid-template-columns:1fr}h2{font-size:26px}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="ey">CCE(MTL) • VALUES • LANGUAGE • ORAL</div><h1>CCE(MTL) Learning Hub</h1><div class="hero">让学生从 CCE 故事、图片、情境和录像中获得“可以说的内容”，再通过词语、句式和 MQ 思考支架，把价值学习转化为有内容、有理由、有反思的口语表达。</div></div></header>
+<nav><div class="nav">
+<button class="navb active" data-p="home">首页</button><button class="navb" data-p="values">CCE 价值观</button><button class="navb" data-p="oral">Oral 分层学习</button><button class="navb" data-p="vocab">口语词语</button><button class="navb" data-p="practice">互动练习</button><button class="navb" data-p="reflection">Reflection</button>
+</div></nav>
+<main>
+<section id="home" class="panel active">
+<h2>共同课程框架</h2><p class="lead">P1–P6 保持共同的 CCE 核心价值观与生活主题；语言支架与思考深度逐步提升。</p>
+<div class="flow"><span>CCE 内容</span><b class="arrow">→</b><span>思考</span><b class="arrow">→</b><span>词语 / 句式鹰架</span><b class="arrow">→</b><span>Oral Practice</span><b class="arrow">→</b><span>Reflection</span></div>
+<div class="grid">
+<div class="card"><span class="badge">P1–P2</span><h3>看图说话 + 简单会话</h3><p>目标约 5 个简单完整句子。</p><div class="scaf">我看到……<br>有人正在……<br>我觉得……<br>我会……</div></div>
+<div class="card"><span class="badge">P3–P4</span><h3>看图说话 + 会话</h3><p>加入动作、地点、原因、感受、建议和个人经验。</p><div class="scaf">我认为……因为……<br>如果是我，我会……<br>有一次，我……</div></div>
+<div class="card"><span class="badge">P5–P6</span><h3>录像会话 + 3 道口试题</h3><p>录像理解 → 个人经验 → 建议 / 价值判断，并加入 MQ pre-planning。</p></div>
+</div></section>
+
+<section id="values" class="panel"><h2>CCE 核心价值观</h2><p class="lead">同一价值观在不同年级使用不同深度的语言表达。</p><div class="grid">
+<div class="card"><div class="value">尊重</div><div class="py">zūn zhòng</div><p>听别人说话，尊重不同想法。</p></div>
+<div class="card"><div class="value">责任感</div><div class="py">zé rèn gǎn</div><p>做好自己的本分，也关心集体。</p></div>
+<div class="card"><div class="value">关爱</div><div class="py">guān ài</div><p>看到别人有需要时，主动关心。</p></div>
+<div class="card"><div class="value">诚信</div><div class="py">chéng xìn</div><p>诚实、守信、做正确的事。</p></div>
+<div class="card"><div class="value">坚毅</div><div class="py">jiān yì</div><p>面对困难不轻易放弃。</p></div>
+<div class="card"><div class="value">和谐</div><div class="py">hé xié</div><p>尊重差异，和别人友好相处。</p></div>
+</div></section>
+
+<section id="oral" class="panel"><h2>Oral 分层学习</h2><div class="tabs"><button class="lvb active" data-l="p12">P1–P2</button><button class="lvb" data-l="p34">P3–P4</button><button class="lvb" data-l="p56">P5–P6</button></div>
+<div id="p12" class="level active"><div class="card"><h3>看图说话</h3><div class="scaf">我看到……<br>有人在……<br>他 / 她看起来……<br>我觉得这样做是……<br>如果是我，我会……</div><p><b>CCE 支持：</b>先从图片找人物、动作、感受和好行为。</p></div></div>
+<div id="p34" class="level"><div class="card"><h3>看图 + 原因 + 经验</h3><div class="scaf">从图片中，我看到……<br>我认为……因为……<br>他 / 她可能觉得……<br>如果是我，我会……<br>有一次，我……</div><p><b>CCE 支持：</b>从情境找问题、价值、行动与后果。</p></div></div>
+<div id="p56" class="level"><div class="card"><span class="badge">P5–P6 录像会话</span>
+<div class="oralq">Q1：视频中最引起你注意的一件事是什么？为什么？</div><div class="scaf">在录像中，我看到……<br>最引起我注意的是……<br>我觉得他 / 她这样做是对的，因为……<br>这体现了……的价值。<br>如果我是他 / 她，我也会……</div><div class="mq"><label><input type="checkbox"> 我有没有说出发生了什么事？</label><label><input type="checkbox"> 我有没有说出谁帮助了谁？</label><label><input type="checkbox"> 我有没有解释为什么这样做是对的？</label></div>
+<div class="oralq">Q2：你有没有帮助过同学，或被同学帮助过？请说一说。</div><div class="scaf">有一次，我……<br>当时，我看到同学……<br>所以，我主动……<br>我这样做是因为……<br>这让我想到 CCE 课教我们……<br>通过这件事，我学会了……</div><div class="mq"><label><input type="checkbox"> 我有没有说清楚发生了什么事？</label><label><input type="checkbox"> 我有没有说出怎样帮助同学？</label><label><input type="checkbox"> 我有没有连接 CCE 学到的价值？</label></div>
+<div class="oralq">Q3：学校、老师或家长可以怎样鼓励孩子关爱同学？</div><div class="scaf">我认为……可以……<br>首先……<br>其次……<br>例如……<br>这样做可以帮助孩子……</div><div class="mq"><label><input type="checkbox"> 我有没有给至少两个建议？</label><label><input type="checkbox"> 我有没有说明为什么有用？</label><label><input type="checkbox"> 我有没有连接 CCE 学习内容？</label></div>
+<div class="timerbox"><button class="primary" id="start">开始 30 秒准备</button><button class="primary" id="reset">重新开始</button><div class="timer" id="time">00:30</div></div><div class="progress"><div class="bar" id="bar"></div></div>
+</div></div></section>
+
+<section id="vocab" class="panel"><h2>口语词语学习</h2><p class="lead">词语直接服务三道口试题。点击喇叭听普通话读音。</p><div class="vocabs" id="vocabs"></div></section>
+
+<section id="practice" class="panel"><h2>互动练习</h2><p class="lead">先理解 CCE 行为与价值，再进入口语表达。</p>
+<div class="card activity"><h3>情境选择</h3><p><b>看到同学有困难时，我应该怎样做？</b></p><button class="choice" data-ok="1">主动上前关心，并问他需不需要帮助。</button><button class="choice">假装没有看见。</button><button class="choice">嘲笑他。</button><div class="feedback"></div></div>
+<div class="card activity"><h3>价值连接</h3><p><b>愿意听同学说话，体现了什么？</b></p><button class="choice">只顾自己</button><button class="choice" data-ok="1">用心听与尊重</button><button class="choice">逃避问题</button><div class="feedback"></div></div>
+<div class="card"><h3>行为和价值配对</h3><p class="small">先点左边行为，再点右边价值。答错可以重新尝试。</p><div class="matchgrid"><div id="left"></div><div id="right"></div></div><div id="mfb" class="feedback"></div></div>
+</section>
+
+<section id="reflection" class="panel"><h2>Post-reflection</h2><div class="card"><div class="mq">
+<label><input type="checkbox"> 我要说得更完整。</label><label><input type="checkbox"> 我要加入更多原因和解释。</label><label><input type="checkbox"> 我要使用更多主题词语。</label><label><input type="checkbox"> 我要联系 CCE 故事 / 图片 / 情境 / 视频。</label><label><input type="checkbox"> 我要说得更清楚、更有条理。</label>
+</div><div class="scaf">下一次录音，我要改进：____________________________</div></div></section>
+</main>
+<footer>CCE(MTL) Learning Hub • CCE Content → Thinking → Language Scaffold → Oral → Reflection</footer>
+<script>
+document.querySelectorAll(".navb").forEach(b=>b.onclick=()=>{document.querySelectorAll(".navb").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.getElementById(b.dataset.p).classList.add("active");scrollTo({top:0,behavior:"smooth"})});
+document.querySelectorAll(".lvb").forEach(b=>b.onclick=()=>{document.querySelectorAll(".lvb").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".level").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.getElementById(b.dataset.l).classList.add("active")});
+const vs=[["录像","lù xiàng","video","Q1"],["手受伤","shǒu shòu shāng","hand is hurt","Q1"],["不方便","bù fāng biàn","not convenient","Q1"],["拿书包","ná shū bāo","carry the schoolbag","Q1"],["主动上前","zhǔ dòng shàng qián","take the initiative","Q1"],["安慰同学","ān wèi tóng xué","comfort a classmate","Q1"],["帮她温习","bāng tā wēn xí","help her revise","Q1"],["关爱同学","guān ài tóng xué","care for classmates","Q1/Q3"],["摔倒了","shuāi dǎo le","fell down","Q2"],["扶起来","fú qǐ lái","help someone up","Q2"],["腿受伤","tuǐ shòu shāng","leg is hurt","Q2"],["送回家","sòng huí jiā","send home","Q2"],["互相关爱","hù xiāng guān ài","care for one another","Q2"],["互相帮助","hù xiāng bāng zhù","help one another","Q2"],["举办活动","jǔ bàn huó dòng","hold an activity","Q3"],["设计海报","shè jì hǎi bào","design a poster","Q3"],["教导同学","jiào dǎo tóng xué","teach students","Q3"],["提醒我们","tí xǐng wǒ men","remind us","Q3"],["周会","zhōu huì","assembly","Q3"],["表演故事","biǎo yǎn gù shì","perform a story","Q3"],["很重要","hěn zhòng yào","very important","Q3"]];
+const vl=document.getElementById("vocabs");vs.forEach(([z,p,e,q])=>{let d=document.createElement("div");d.className="vocab";d.innerHTML=`<div class="vtop"><div><div class="zh">${z}</div><div class="py">${p}</div></div><button class="spk">🔊</button></div><div>${e}</div><span class="tag">${q}</span>`;d.querySelector("button").onclick=()=>{let u=new SpeechSynthesisUtterance(z);u.lang="zh-CN";u.rate=.82;speechSynthesis.cancel();speechSynthesis.speak(u)};vl.appendChild(d)});
+document.querySelectorAll(".activity").forEach(a=>a.querySelectorAll(".choice").forEach(c=>c.onclick=()=>{a.querySelectorAll(".choice").forEach(x=>x.classList.remove("good","bad"));let f=a.querySelector(".feedback");if(c.dataset.ok){c.classList.add("good");f.className="feedback fg";f.textContent="很好！你把 CCE 学到的价值和行动连接起来了。"}else{c.classList.add("bad");f.className="feedback fr";f.textContent="再想一想。友好相处需要关心、尊重和帮助别人。你可以重新选择。"}}));
+const pairs=[["主动关心同学。","关爱。"],["看到同学有困难，伸出援手。","互相帮助。"],["用礼貌的话和同学说话。","尊重。"],["愿意听同学说话。","用心听。"]];let sel=null;const L=document.getElementById("left"),R=document.getElementById("right"),M=document.getElementById("mfb");pairs.forEach(([a,b])=>{let x=document.createElement("button");x.className="match";x.textContent=a;x.dataset.ans=b;x.onclick=()=>{if(x.classList.contains("good"))return;document.querySelectorAll("#left .match").forEach(y=>y.classList.remove("sel"));sel=x;x.classList.add("sel");M.textContent="请选择右边对应的价值。"};L.appendChild(x)});[...pairs].sort(()=>Math.random()-.5).forEach(([a,b])=>{let x=document.createElement("button");x.className="match";x.textContent=b;x.onclick=()=>{if(!sel){M.className="feedback fr";M.textContent="请先选择左边一个行为。";return}if(sel.dataset.ans===b){sel.classList.add("good");sel.classList.remove("sel");x.classList.add("good");M.className="feedback fg";M.textContent="答对了！继续下一组。";sel=null}else{M.className="feedback fr";M.textContent="这个配对不正确，请再试一次。";x.classList.add("bad");setTimeout(()=>x.classList.remove("bad"),600)}};R.appendChild(x)});
+let n=30,t=null;const T=document.getElementById("time"),B=document.getElementById("bar");function draw(){T.textContent=`00:${String(n).padStart(2,"0")}`;B.style.width=`${(30-n)/30*100}%`}document.getElementById("start").onclick=()=>{clearInterval(t);n=30;draw();t=setInterval(()=>{n--;draw();if(n<=0)clearInterval(t)},1000)};document.getElementById("reset").onclick=()=>{clearInterval(t);n=30;draw()};draw();
+</script></body></html>
