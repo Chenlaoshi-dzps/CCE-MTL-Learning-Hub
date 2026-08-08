@@ -177,6 +177,10 @@ h1{
  body:before,.crystal,h1,.portal-ring,.corner-spark,.float{animation:none}
  .unit-inner{transition:none}
 }
+
+.unit7-enter{animation:unit7Pulse 2.5s ease-in-out infinite!important;box-shadow:0 7px 22px rgba(221,185,92,.18)}
+@keyframes unit7Pulse{50%{transform:scale(1.025);box-shadow:0 8px 30px rgba(221,185,92,.32)}}
+
 </style>
 </head>
 <body>
@@ -520,7 +524,7 @@ h1{
                 <p>和谐 (Harmony) · 尊重 (Respect)</p>
               </div>
               <button class="back-btn" type="button">↩ 翻回正面</button>
-              <button class="mission-btn" type="button" disabled>🔐 单元魔法任务 · 即将解锁</button>
+              <a class="mission-btn unit7-enter" href="unit7/" style="display:block;text-align:center;text-decoration:none;background:#ddb95c;color:#1b0e29;border-color:#ddb95c;">🪄 进入 Unit 7 魔法任务</a>
             </div>
           </div>
         </article>
