@@ -400,6 +400,70 @@ audio{width:100%;margin-top:12px}
  .balloon{width:105px}.balloon .bubble{width:94px;min-height:100px}
 }
 
+
+.voice-toggle{
+  border:1px solid var(--line);background:rgba(18,8,31,.82);color:var(--gold2);
+  border-radius:999px;padding:9px 13px;font-weight:900;cursor:pointer;white-space:nowrap;
+}
+.voice-toggle.off{opacity:.58;color:var(--soft)}
+.speakable-choice{position:relative;padding-right:44px!important}
+.speaker-badge{
+  position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  width:29px;height:29px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(245,217,141,.13);border:1px solid rgba(245,217,141,.24);
+  color:var(--gold2);font-size:15px;pointer-events:none;
+}
+.balloon.speakable-choice{padding-right:0!important}
+.balloon .speaker-badge{
+  right:0;top:9px;transform:none;width:27px;height:27px;
+  background:rgba(25,11,43,.72);z-index:4
+}
+.voice-hint{
+  margin:10px auto 0;max-width:760px;text-align:center;color:#ead7fa;
+  font-size:12.5px;line-height:1.55
+}
+.voice-wave{animation:voiceWave .5s ease}
+@keyframes voiceWave{
+  0%{box-shadow:0 0 0 0 rgba(245,217,141,.55)}
+  100%{box-shadow:0 0 0 12px rgba(245,217,141,0)}
+}
+@media(max-width:620px){
+  .topbar{flex-wrap:wrap}
+  .voice-toggle{order:3;width:100%;text-align:center}
+}
+
+
+/* Mission 4: Witch antidote vs poison game */
+.witch-lab{position:relative;border-radius:22px;padding:18px;border:1px solid rgba(176,122,229,.24);
+background:linear-gradient(165deg,rgba(49,24,78,.58),rgba(17,8,29,.88));overflow:hidden}
+.witch-lab:before{content:"";position:absolute;inset:auto -10% -30% -10%;height:180px;background:radial-gradient(circle,rgba(157,77,190,.22),transparent 60%)}
+.witch-top{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-bottom:12px;position:relative;z-index:1}
+.witch-status{display:flex;gap:10px;flex-wrap:wrap}
+.witch-badge{padding:8px 11px;border-radius:999px;border:1px solid rgba(224,187,98,.22);background:rgba(0,0,0,.18);font-weight:900;font-size:12px;color:var(--soft)}
+.cauldron-stage{text-align:center;position:relative;z-index:1;margin:6px 0 12px}
+.witch-cauldron{font-size:96px;display:inline-block;filter:drop-shadow(0 0 18px rgba(176,122,229,.28));transition:.25s}
+.witch-cauldron.good{animation:brewGood .7s ease}
+.witch-cauldron.bad{animation:brewBad .7s ease}
+@keyframes brewGood{40%{transform:translateY(-6px) scale(1.08) rotate(-4deg)}70%{transform:scale(.98) rotate(2deg)}}
+@keyframes brewBad{25%,75%{transform:translateX(-10px)}50%{transform:translateX(10px) rotate(3deg)}}
+.spark-reward{margin-top:8px;font-size:13px;color:var(--gold2);font-weight:900;min-height:22px}
+.poison-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;position:relative;z-index:1}
+.poison-card{position:relative;border-radius:18px;border:1px solid rgba(176,122,229,.22);background:rgba(176,122,229,.07);padding:14px 14px 14px 16px;color:var(--cream);text-align:left;cursor:pointer;min-height:84px;font-weight:850}
+.poison-card .mini{display:block;color:var(--soft);font-size:12px;font-weight:700;margin-top:6px;line-height:1.45}
+.poison-card.good{background:rgba(115,185,142,.18);border-color:#73b98e;box-shadow:0 0 18px rgba(115,185,142,.12)}
+.poison-card.bad{background:rgba(212,108,126,.15);border-color:#d46c7e;box-shadow:0 0 18px rgba(212,108,126,.14)}
+.poison-card.used{opacity:.55;pointer-events:none}
+.poison-card:active{transform:scale(.985)}
+.prize-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:12px 0 2px;position:relative;z-index:1}
+.prize-pill{padding:8px 10px;border-radius:999px;font-size:12px;font-weight:900;border:1px solid rgba(224,187,98,.22);background:rgba(0,0,0,.16)}
+.prize-pill.good{color:#dff5e6;border-color:rgba(115,185,142,.35);background:rgba(115,185,142,.10)}
+.prize-pill.bad{color:#ffd6de;border-color:rgba(212,108,126,.35);background:rgba(212,108,126,.10)}
+.witch-dialogue{margin-top:12px;padding:12px 13px;border-radius:14px;background:rgba(0,0,0,.18);min-height:58px;color:var(--soft);font-size:13px;line-height:1.6;position:relative;z-index:1}
+.witch-feedback-tag{display:inline-block;margin-top:6px;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:900}
+.witch-feedback-tag.good{background:rgba(115,185,142,.16);color:#dff5e6}
+.witch-feedback-tag.bad{background:rgba(212,108,126,.16);color:#ffd6de}
+@media(max-width:620px){.poison-grid{grid-template-columns:1fr}.witch-top{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -410,6 +474,7 @@ audio{width:100%;margin-top:12px}
       <span class="score">✨ 魔法分 <b id="points">0</b></span>
       <span class="score">💎 宝石 <b id="gems">0</b>/6</span>
     </div>
+    <button class="voice-toggle" id="voiceToggle" type="button">🔊 语音辅助：开</button>
     <button class="music" id="music">♫ 音乐</button>
   </div>
 
@@ -420,6 +485,7 @@ audio{width:100%;margin-top:12px}
     <h2>《同学之间》× CCE × Oral 魔法任务</h2>
     <p>不同的生活经历、习惯和性格，会影响我们的想法和感受。通过华文课文、CCE 情境和录像口试任务，学习尊重不同的想法、关心同学的感受，并用华文表达价值观。</p>
     <div class="bridge">👾 打怪兽 → 🎈 射气球 → 🧙‍♀️ 魔法药水 → 🛟 同学救援 → 🔍 录像找线索 → 🎤 Oral Boss</div>
+    <div class="voice-hint">🔊 看不懂字也没关系：点击有 🔊 的选项，网页会把华文读给你听。</div>
     <div class="progress-shell">
       <div class="progress-top"><span>魔法学习进度</span><span id="progressText">0 / 6 Missions</span></div>
       <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
@@ -509,33 +575,31 @@ audio{width:100%;margin-top:12px}
       <span class="lock-msg">🔒 完成上一关解锁</span>
     </div>
     <div class="mission-body">
-      <div class="game-banner"><div class="game-icon">🛟</div><div><strong>同学救援任务</strong><span>完成两段校园救援：先帮助文静同学，再帮助受伤同学。</span></div></div>
-      <div class="rescue-map">
-        <div class="rescue-progress"><span class="rescue-step on"></span><span class="rescue-step"></span></div>
-        <div class="rescue-scene active" data-rescue="0">
-          <div class="rescue-visual">😟🗯️</div>
-          <h4>第一站：文静的同学</h4>
-          <p class="task-text">他需要一点时间才敢说出自己的想法。请选择最合适的“救援工具”。</p>
-          <div class="rescue-tools">
-            <button class="rescue-tool" data-good="false">⏩ 催促：“快点说啦！”</button>
-            <button class="rescue-tool" data-good="true">⏳ 给他时间，鼓励他慢慢说</button>
-            <button class="rescue-tool" data-good="false">🚪 不理他，自己离开</button>
+      <div class="game-banner"><div class="game-icon">🧙‍♀️</div><div><strong>女巫毒药实验室</strong><span>帮同学友好相处，就选“礼物解药”；会伤害关系的做法，就是“危险毒药”。集齐 3 个解药，避开 2 次毒药！</span></div></div>
+      <div class="witch-lab">
+        <div class="witch-top">
+          <div class="witch-status">
+            <span class="witch-badge">🎁 解药：<b id="antidoteCount">0</b>/3</span>
+            <span class="witch-badge">☠️ 毒药：<b id="poisonCount">0</b>/2</span>
           </div>
-          <div class="rescue-dialogue">选择一个行动。</div>
+          <div class="witch-badge">Mission 4</div>
         </div>
-        <div class="rescue-scene" data-rescue="1">
-          <div class="rescue-visual">🤕🎒</div>
-          <h4>第二站：受伤的同学</h4>
-          <p class="task-text">他的手受伤了，拿书包不方便。你要怎样帮助他？</p>
-          <div class="rescue-tools">
-            <button class="rescue-tool" data-good="true">🤝 主动问需不需要帮助，并帮他拿书包</button>
-            <button class="rescue-tool" data-good="false">🙈 假装没看到</button>
-            <button class="rescue-tool" data-good="false">😂 笑他动作很慢</button>
-          </div>
-          <div class="rescue-dialogue">完成最后一站救援。</div>
+        <div class="cauldron-stage">
+          <div class="witch-cauldron" id="witchCauldron">🫕</div>
+          <div class="spark-reward" id="witchSpark">选择一瓶药水，试试看它是“礼物解药”还是“危险毒药”。</div>
         </div>
+        <div class="poison-grid" id="poisonGrid">
+          <button class="poison-card" data-good="true"><strong>🎁 给文静同学时间，鼓励他慢慢说</strong><span class="mini">尊重同学感受，帮助他安心表达。</span></button>
+          <button class="poison-card" data-good="false"><strong>☠️ 催促：“快点说！”</strong><span class="mini">会让同学更紧张，关系变差。</span></button>
+          <button class="poison-card" data-good="true"><strong>🎁 主动问受伤同学要不要帮忙</strong><span class="mini">看到需要，主动关心和帮助。</span></button>
+          <button class="poison-card" data-good="false"><strong>☠️ 假装没看见同学受伤</strong><span class="mini">没有关心别人的困难。</span></button>
+          <button class="poison-card" data-good="true"><strong>🎁 有误会时先问清楚，再好好沟通</strong><span class="mini">可以减少误会，恢复友谊。</span></button>
+          <button class="poison-card" data-good="false"><strong>☠️ 嘲笑同学动作慢、说话慢</strong><span class="mini">会伤害同学，也不尊重别人。</span></button>
+        </div>
+        <div class="prize-row" id="witchPrizeRow"></div>
+        <div class="witch-dialogue" id="witchDialogue">🧪 女巫提醒：选到正确的“礼物解药”，你会得到鼓励礼物；选到“危险毒药”，大锅会冒出黑烟！</div>
       </div>
-      <div class="feedback" id="fb-rescue"></div>
+      <div class="feedback" id="fb-witch"></div>
       <button class="complete-btn" id="complete4">✅ Mission 4 完成</button>
 </div>
   </section>
@@ -753,6 +817,88 @@ function finishMission(n,btn=null){
   return true;
 }
 
+
+/* ===== Voice support for low-readiness learners ===== */
+let voiceAssistOn = true;
+
+function cleanSpeakText(text){
+  return (text || '')
+    .replace(/[🔊👾🔎🥊🚫👂🙉😆📱🤝😠📣👊🎈🎯❌🧙‍♀️💬🌿😂🛟⏩⏳🚪🙈🤕🎒🔍😊🚶🧪✨🏆💥💜❤️💨🫕]/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+
+function speakChinese(text, sourceEl=null){
+  if(!voiceAssistOn || !('speechSynthesis' in window)) return;
+  const clean = cleanSpeakText(text);
+  if(!clean) return;
+
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(clean);
+  utter.lang = 'zh-CN';
+  utter.rate = 0.72;
+  utter.pitch = 1.0;
+  utter.volume = 1.0;
+
+  if(sourceEl){
+    const badge = sourceEl.querySelector('.speaker-badge');
+    if(badge){
+      badge.classList.remove('voice-wave');
+      void badge.offsetWidth;
+      badge.classList.add('voice-wave');
+    }
+  }
+  window.speechSynthesis.speak(utter);
+}
+
+function enableChoiceSpeech(){
+  const selectors = [
+    '.spell-card',
+    '.balloon',
+    '.ingredient',
+    '.rescue-tool',
+    '.clue-card',
+    '.poison-card',
+    '.option',
+    '.choice-chip',
+    '.scene-answer',
+    '.oraltab'
+  ];
+
+  document.querySelectorAll(selectors.join(',')).forEach(btn=>{
+    if(btn.dataset.voiceReady==='1') return;
+    btn.dataset.voiceReady='1';
+
+    const originalText = btn.innerText || btn.textContent || '';
+    btn.dataset.speakText = originalText.trim();
+    btn.classList.add('speakable-choice');
+
+    const badge = document.createElement('span');
+    badge.className='speaker-badge';
+    badge.textContent='🔊';
+    badge.setAttribute('aria-hidden','true');
+    btn.appendChild(badge);
+
+    btn.addEventListener('click', ()=>{
+      speakChinese(btn.dataset.speakText, btn);
+    }, true);
+  });
+}
+
+const voiceToggle = document.getElementById('voiceToggle');
+if(voiceToggle){
+  voiceToggle.addEventListener('click', ()=>{
+    voiceAssistOn = !voiceAssistOn;
+    if(!voiceAssistOn && 'speechSynthesis' in window) window.speechSynthesis.cancel();
+    voiceToggle.textContent = voiceAssistOn ? '🔊 语音辅助：开' : '🔇 语音辅助：关';
+    voiceToggle.classList.toggle('off', !voiceAssistOn);
+  });
+}
+
+enableChoiceSpeech();
+const voiceObserver = new MutationObserver(()=>enableChoiceSpeech());
+voiceObserver.observe(document.body,{childList:true,subtree:true});
+
 /* ===== Game logic ===== */
 
 /* Mission 1: Monster battle */
@@ -877,30 +1023,80 @@ $$('#ingredientShelf .ingredient').forEach(btn=>{
  }
 });
 
-/* Mission 4: Rescue quest */
-let rescueIndex=0;
-$$('.rescue-scene').forEach((scene,idx)=>{
- scene.querySelectorAll('.rescue-tool').forEach(btn=>{
+/* Mission 4: Witch antidote vs poison */
+let antidoteCount=0, poisonCount=0;
+const prizeMsgs=[
+  '🎁 你得到「同理心小星星」！',
+  '🎁 你得到「友谊糖果」！',
+  '🎁 你得到「关爱能量石」！'
+];
+const goodFb=[
+  '太好了！这个做法能让同学感到被尊重、被关心。',
+  '答对了！这是帮助同学、关爱同学的好方法。',
+  '真棒！这瓶是“礼物解药”，可以让友谊变得更好。'
+];
+const badFb=[
+  '哎呀！这是“危险毒药”。催促、嘲笑或不理会别人，会让关系更糟。',
+  '小心！这瓶不是解药。这个做法没有考虑同学的感受。'
+];
+function addPrize(type,text){
+  const pill=document.createElement('span');
+  pill.className='prize-pill '+type;
+  pill.textContent=text;
+  $('#witchPrizeRow').appendChild(pill);
+}
+$$('#poisonGrid .poison-card').forEach(btn=>{
   btn.onclick=()=>{
-   const dialogue=scene.querySelector('.rescue-dialogue');
-   if(btn.dataset.good==='true'){
-    btn.classList.add('good');
-    dialogue.textContent=idx===0?'✨ 救援成功：你尊重了文静同学的节奏和感受。':'✨ 救援成功：你主动关心并帮助了有困难的同学。';
-    if(idx===0){
-      setTimeout(()=>{
-       scene.classList.remove('active');$$('.rescue-scene')[1].classList.add('active');$$('.rescue-step')[1].classList.add('on');
-      },700);
+    if(btn.classList.contains('used')) return;
+    const good=btn.dataset.good==='true';
+    const fb=$('#fb-witch');
+    const dlg=$('#witchDialogue');
+    const cauld=$('#witchCauldron');
+    const spark=$('#witchSpark');
+    btn.classList.add('used');
+    if(good){
+      antidoteCount++;
+      $('#antidoteCount').textContent=antidoteCount;
+      btn.classList.add('good');
+      cauld.classList.remove('bad','good'); void cauld.offsetWidth; cauld.classList.add('good');
+      spark.textContent='✨ 金色光芒出现了！你选中了“礼物解药”。';
+      const prize=prizeMsgs[Math.min(antidoteCount-1,prizeMsgs.length-1)];
+      addPrize('good', prize);
+      dlg.innerHTML = goodFb[(antidoteCount-1)%goodFb.length] + '<br><span class="witch-feedback-tag good">礼物解药成功</span>';
+      fb.className='feedback show good';
+      fb.textContent='✅ 正确！这是“礼物解药”。';
+      if(antidoteCount>=3){
+        fb.textContent='🏆 你成功收集 3 个礼物解药！+100 魔法分，获得「关爱宝石」。Mission 5 已解锁！';
+        finishMission(4,$('#complete4'));
+      }
     }else{
-      const fb=$('#fb-rescue');fb.className='feedback show good';fb.textContent='🏆 两段校园救援完成！+100 魔法分，获得「关爱宝石」。';
-      finishMission(4,$('#complete4'));
+      poisonCount++;
+      $('#poisonCount').textContent=poisonCount;
+      btn.classList.add('bad');
+      cauld.classList.remove('good','bad'); void cauld.offsetWidth; cauld.classList.add('bad');
+      spark.textContent='💨 黑烟冒出来了！你选中了“危险毒药”。';
+      addPrize('bad', '☠️ 毒药 +1');
+      dlg.innerHTML = badFb[(poisonCount-1)%badFb.length] + '<br><span class="witch-feedback-tag bad">危险毒药</span>';
+      fb.className='feedback show bad';
+      fb.textContent='❌ 这是“危险毒药”。请继续找真正的解药。';
+      if(poisonCount>=2 && antidoteCount<3){
+        dlg.innerHTML='🧹 黑烟太多了！女巫帮你把实验室重置，再试一次吧。<br><span class="witch-feedback-tag bad">重新挑战</span>';
+        fb.textContent='⚠️ 你碰到 2 次毒药了。实验室已重置，请重新挑战 Mission 4。';
+        setTimeout(resetWitchGame, 900);
+      }
     }
-   }else{
-    btn.classList.add('bad');dialogue.textContent='再想一想：这个行动有没有关注对方的感受和需要？';
-    setTimeout(()=>btn.classList.remove('bad'),700);
-   }
   }
- })
 });
+function resetWitchGame(){
+  antidoteCount=0; poisonCount=0;
+  $('#antidoteCount').textContent='0'; $('#poisonCount').textContent='0';
+  $('#witchPrizeRow').innerHTML='';
+  $('#witchCauldron').className='witch-cauldron';
+  $('#witchSpark').textContent='选择一瓶药水，试试看它是“礼物解药”还是“危险毒药”。';
+  $('#fb-witch').className='feedback'; $('#fb-witch').textContent='';
+  $('#witchDialogue').textContent='🧪 女巫提醒：选到正确的“礼物解药”，你会得到鼓励礼物；选到“危险毒药”，大锅会冒出黑烟！';
+  $$('#poisonGrid .poison-card').forEach(card=>card.className='poison-card');
+}
 
 /* Mission 5: Fake video + clue hunt */
 let scene='A',videoTimer=null;
