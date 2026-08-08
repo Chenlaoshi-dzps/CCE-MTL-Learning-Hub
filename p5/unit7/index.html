@@ -251,6 +251,155 @@ audio{width:100%;margin-top:12px}
   100%{transform:scale(1)}
 }
 
+
+.scene-answer{-webkit-tap-highlight-color:rgba(224,187,98,.18);touch-action:manipulation;transition:.18s}
+.scene-answer:active{transform:scale(.985)}
+.scene-answer.correct{background:rgba(115,185,142,.20)!important;border-color:#73b98e!important;box-shadow:0 0 18px rgba(115,185,142,.12)}
+.scene-answer.wrong{background:rgba(212,108,126,.18)!important;border-color:#d46c7e!important}
+.scene-inline-feedback{display:none;margin-top:10px;padding:10px 11px;border-radius:12px;font-size:13px;line-height:1.5;border:1px solid rgba(224,187,98,.18)}
+.scene-inline-feedback.show{display:block}
+.scene-inline-feedback.good{color:#d8f1df;background:rgba(115,185,142,.09);border-color:rgba(115,185,142,.25)}
+.scene-inline-feedback.bad{color:#f5cbd2;background:rgba(212,108,126,.08);border-color:rgba(212,108,126,.23)}
+.mission4-next{display:none;width:100%;margin-top:14px;padding:11px 14px;border:0;border-radius:999px;background:var(--gold);color:#1a0d28;font-weight:950;cursor:pointer}
+.mission4-next.show{display:block}
+
+
+/* ===== Game upgrade ===== */
+.game-banner{
+  display:flex;align-items:center;gap:12px;margin:0 0 16px;padding:13px 14px;border-radius:16px;
+  border:1px solid rgba(224,187,98,.22);background:linear-gradient(90deg,rgba(127,75,192,.13),rgba(224,187,98,.07))
+}
+.game-banner .game-icon{font-size:34px}
+.game-banner strong{display:block;color:var(--gold2);font-size:15px}
+.game-banner span{display:block;color:var(--soft);font-size:12px;margin-top:2px}
+
+/* Monster battle */
+.battle-arena{
+  position:relative;min-height:340px;border-radius:22px;overflow:hidden;padding:18px;
+  border:1px solid rgba(176,122,229,.25);
+  background:
+   radial-gradient(circle at 50% 35%,rgba(176,122,229,.16),transparent 35%),
+   linear-gradient(180deg,#251238,#10081b 72%);
+}
+.battle-hud{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.hpbox{padding:9px 10px;border-radius:13px;background:rgba(0,0,0,.23);border:1px solid rgba(255,255,255,.08)}
+.hpbox-top{display:flex;justify-content:space-between;font-size:12px;color:var(--soft);margin-bottom:6px}
+.hpbar{height:9px;border-radius:999px;background:rgba(255,255,255,.09);overflow:hidden}
+.hpfill{height:100%;width:100%;background:linear-gradient(90deg,#73b98e,#f5d98d);transition:width .35s}
+.hpfill.monster{background:linear-gradient(90deg,#d46c7e,#9d4dbe)}
+.monster-stage{text-align:center;padding:8px 0 10px}
+.monster-avatar{
+  display:inline-grid;place-items:center;width:140px;height:140px;border-radius:50%;font-size:86px;
+  background:radial-gradient(circle,rgba(157,77,190,.25),rgba(0,0,0,.08));
+  filter:drop-shadow(0 0 18px rgba(157,77,190,.34));transition:.22s
+}
+.monster-avatar.hit{animation:monsterHit .48s ease}
+.monster-avatar.attack{animation:monsterAttack .5s ease}
+@keyframes monsterHit{35%{transform:translateX(-12px) rotate(-6deg) scale(.92)}70%{transform:translateX(10px) rotate(5deg)}}
+@keyframes monsterAttack{45%{transform:scale(1.15) translateY(10px)}}
+.battle-round{text-align:center;color:var(--gold2);font-weight:950;margin:4px 0 11px}
+.spell-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.spell-card{
+  min-height:70px;border-radius:15px;border:1px solid rgba(176,122,229,.24);
+  background:rgba(176,122,229,.07);color:var(--cream);padding:10px;font-weight:850;cursor:pointer;text-align:center
+}
+.spell-card:hover{border-color:var(--gold)} .spell-card:active{transform:scale(.98)}
+.battle-msg{min-height:44px;text-align:center;padding:10px;color:var(--soft);font-size:13px}
+.damage-pop{
+ position:absolute;left:50%;top:38%;font-size:28px;font-weight:950;color:var(--gold2);
+ pointer-events:none;animation:damageFly .8s ease-out forwards
+}
+@keyframes damageFly{to{opacity:0;transform:translate(-50%,-70px) scale(1.35)}}
+
+/* Balloon shooting */
+.balloon-field{
+  position:relative;min-height:540px;border-radius:22px;overflow:hidden;border:1px solid rgba(176,122,229,.24);
+  background:linear-gradient(#1d1032,#27123e 58%,#132035);
+}
+.balloon-field:before{
+ content:"";position:absolute;inset:auto 0 0;height:110px;
+ background:linear-gradient(transparent,rgba(85,127,99,.20));
+}
+.balloon-score{
+  position:absolute;z-index:5;top:10px;left:10px;right:10px;display:flex;justify-content:space-between;
+  padding:8px 11px;border-radius:999px;background:rgba(10,5,18,.56);border:1px solid rgba(224,187,98,.18);
+  font-size:12px;font-weight:900
+}
+.balloon{
+  position:absolute;width:112px;min-height:130px;border:0;background:transparent;color:#22112e;cursor:crosshair;
+  animation:floatBalloon 3.2s ease-in-out infinite;touch-action:manipulation
+}
+.balloon .bubble{
+  display:flex;align-items:center;justify-content:center;width:100px;min-height:106px;padding:12px 9px;
+  border-radius:52% 48% 50% 50%;background:linear-gradient(145deg,#f7df93,#d9a9ef);
+  box-shadow:inset 8px 8px 15px rgba(255,255,255,.20),0 9px 24px rgba(0,0,0,.23);
+  font-size:12px;line-height:1.35;font-weight:950;text-align:center
+}
+.balloon .string{width:1px;height:35px;background:rgba(255,255,255,.48);margin:auto}
+.balloon:nth-of-type(2n) .bubble{background:linear-gradient(145deg,#b8d9f4,#cda3eb)}
+.balloon:nth-of-type(3n) .bubble{background:linear-gradient(145deg,#f3b4c1,#f0d38b)}
+@keyframes floatBalloon{50%{transform:translateY(-13px) rotate(2deg)}}
+.balloon.popped{animation:popBalloon .34s ease-out forwards;pointer-events:none}
+@keyframes popBalloon{60%{transform:scale(1.23)}100%{transform:scale(.05);opacity:0}}
+.crosshair{
+ position:absolute;z-index:8;width:44px;height:44px;border:2px solid rgba(245,217,141,.8);border-radius:50%;
+ pointer-events:none;transform:translate(-50%,-50%);opacity:0
+}
+.crosshair:before,.crosshair:after{content:"";position:absolute;background:rgba(245,217,141,.85)}
+.crosshair:before{width:60px;height:1px;left:-10px;top:20px}.crosshair:after{height:60px;width:1px;top:-10px;left:20px}
+.crosshair.fire{animation:crossFire .45s ease-out}
+@keyframes crossFire{0%{opacity:1;transform:translate(-50%,-50%) scale(.55)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.45)}}
+
+/* Potion lab */
+.ingredient-shelf{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.ingredient{
+ border:1px solid rgba(176,122,229,.20);background:rgba(176,122,229,.065);color:var(--cream);
+ border-radius:15px;padding:11px;text-align:center;cursor:pointer;font-weight:850
+}
+.ingredient.used{opacity:.35;pointer-events:none}.ingredient.badshake{animation:badShake .5s}
+@keyframes badShake{25%,75%{transform:translateX(-7px)}50%{transform:translateX(7px)}}
+.cauldron-wrap{text-align:center;margin:12px 0 16px}
+.cauldron{font-size:96px;display:inline-block;filter:drop-shadow(0 0 22px rgba(176,122,229,.28))}
+.cauldron.bubble{animation:cauldronBubble .75s ease}
+@keyframes cauldronBubble{40%{transform:scale(1.10) rotate(-3deg)}70%{transform:scale(.98) rotate(2deg)}}
+.recipe-slots{display:flex;justify-content:center;gap:7px;margin-top:5px}
+.recipe-slot{width:24px;height:24px;border-radius:50%;border:1px solid rgba(224,187,98,.30);background:rgba(255,255,255,.06)}
+.recipe-slot.filled{background:var(--gold);box-shadow:0 0 14px rgba(224,187,98,.45)}
+
+/* Rescue mission */
+.rescue-map{
+ position:relative;border-radius:22px;padding:18px;border:1px solid rgba(176,122,229,.22);
+ background:linear-gradient(160deg,rgba(49,24,78,.48),rgba(17,8,29,.78))
+}
+.rescue-progress{display:flex;align-items:center;gap:7px;margin-bottom:14px}
+.rescue-step{flex:1;height:7px;border-radius:999px;background:rgba(255,255,255,.09)}
+.rescue-step.on{background:linear-gradient(90deg,var(--purple2),var(--gold))}
+.rescue-scene{display:none}.rescue-scene.active{display:block}
+.rescue-visual{text-align:center;font-size:78px;margin:8px 0}
+.rescue-tools{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.rescue-tool{
+ border:1px solid rgba(176,122,229,.22);border-radius:15px;background:rgba(176,122,229,.06);
+ color:var(--cream);padding:11px;font-weight:850;cursor:pointer
+}
+.rescue-tool.good{background:rgba(115,185,142,.17);border-color:var(--green)}
+.rescue-tool.bad{background:rgba(212,108,126,.13);border-color:var(--red)}
+.rescue-dialogue{min-height:50px;margin-top:12px;padding:11px;border-radius:13px;background:rgba(0,0,0,.16);color:var(--soft);font-size:13px}
+
+/* Video clue hunt */
+.clue-board{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:13px}
+.clue-card{
+ position:relative;min-height:84px;border-radius:15px;border:1px solid rgba(176,122,229,.20);
+ background:rgba(176,122,229,.055);color:var(--cream);padding:11px;cursor:pointer;font-weight:850
+}
+.clue-card.found{background:rgba(115,185,142,.14);border-color:var(--green)}
+.clue-card.decoy{animation:badShake .5s;background:rgba(212,108,126,.09);border-color:var(--red)}
+.clue-count{text-align:center;color:var(--gold2);font-weight:950;margin-top:10px}
+@media(max-width:620px){
+ .spell-grid,.ingredient-shelf,.rescue-tools,.clue-board{grid-template-columns:1fr}
+ .balloon-field{min-height:650px}
+ .balloon{width:105px}.balloon .bubble{width:94px;min-height:100px}
+}
+
 </style>
 </head>
 <body>
@@ -270,7 +419,7 @@ audio{width:100%;margin-top:12px}
     <h1>我们的生活经历</h1>
     <h2>《同学之间》× CCE × Oral 魔法任务</h2>
     <p>不同的生活经历、习惯和性格，会影响我们的想法和感受。通过华文课文、CCE 情境和录像口试任务，学习尊重不同的想法、关心同学的感受，并用华文表达价值观。</p>
-    <div class="bridge">📖 CL《同学之间》 → ❤️ CCE《我们的生活经历》 → 🌱 联系生活 → 🎤 看录像说话</div>
+    <div class="bridge">👾 打怪兽 → 🎈 射气球 → 🧙‍♀️ 魔法药水 → 🛟 同学救援 → 🔍 录像找线索 → 🎤 Oral Boss</div>
     <div class="progress-shell">
       <div class="progress-top"><span>魔法学习进度</span><span id="progressText">0 / 6 Missions</span></div>
       <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
@@ -293,24 +442,19 @@ audio{width:100%;margin-top:12px}
       <div><h3>Mission 1 · 《同学之间》侦探任务</h3><p>从华文课文找出“友好相处”的关键魔法。</p></div>
     </div>
     <div class="mission-body">
-      <div class="task-title">🔍 同学之间发生误会时，最好的第一步是什么？</div>
-      <div class="task-text">课文提醒我们：发生误会或冲突时，不要急着生气或打架，要先了解发生了什么。</div>
-      <div class="options" data-q="m1q1">
-        <button class="option" data-correct="false">A. 马上生气，不听解释</button>
-        <button class="option" data-correct="true">B. 先问清楚，听同学解释</button>
-        <button class="option" data-correct="false">C. 和同学打架</button>
-        <button class="option" data-correct="false">D. 以后都不跟他说话</button>
+      <div class="game-banner"><div class="game-icon">👾</div><div><strong>打怪兽游戏：击退“误会怪兽”</strong><span>连续用正确的沟通魔法攻击 3 次，才能打败怪兽。</span></div></div>
+      <div class="battle-arena" id="battleArena">
+        <div class="battle-hud">
+          <div class="hpbox"><div class="hpbox-top"><span>🧙 你</span><span id="heroHpText">3 ❤️</span></div><div class="hpbar"><div class="hpfill" id="heroHp"></div></div></div>
+          <div class="hpbox"><div class="hpbox-top"><span>👾 误会怪兽</span><span id="monsterHpText">3 💜</span></div><div class="hpbar"><div class="hpfill monster" id="monsterHp"></div></div></div>
+        </div>
+        <div class="monster-stage"><div class="monster-avatar" id="monsterAvatar">👾</div></div>
+        <div class="battle-round" id="battleRound">Round 1 / 3</div>
+        <div class="spell-grid" id="spellGrid"></div>
+        <div class="battle-msg" id="battleMsg">选择最合适的“同学相处魔法”攻击怪兽！</div>
       </div>
-      <div class="feedback" id="fb-m1q1"></div>
-      <div class="story-path">
-        <span class="story-node">发生误会</span><span class="story-arrow">→</span>
-        <span class="story-node">问清楚</span><span class="story-arrow">→</span>
-        <span class="story-node">用心听</span><span class="story-arrow">→</span>
-        <span class="story-node">理解原因</span><span class="story-arrow">→</span>
-        <span class="story-node">好好沟通 / 和好</span>
-      </div>
-      <button class="complete-btn" id="complete1">✨ Mission 1 完成</button>
-    </div>
+      <button class="complete-btn" id="complete1">✅ Mission 1 完成</button>
+</div>
   </section>
 
   <!-- Mission 2 -->
@@ -321,23 +465,14 @@ audio{width:100%;margin-top:12px}
       <span class="lock-msg">🔒 完成上一关解锁</span>
     </div>
     <div class="mission-body">
-      <div class="task-title">🧩 把情境放到正确的“魔法镜”</div>
-      <div class="task-text">先点击下面的情境，再选择它更接近哪一种差异。</div>
-
-      <div id="sortChoices">
-        <button class="choice-chip" data-cat="habit">✋ 左撇子使用为右手设计的剪刀，可能觉得不方便。</button>
-        <button class="choice-chip" data-cat="personality">🌳 很多人一起说话时，比较文静的同学可能会紧张。</button>
-        <button class="choice-chip" data-cat="habit">🍽️ 左右手习惯不同，吃饭时手肘可能会碰到。</button>
-        <button class="choice-chip" data-cat="personality">🎉 有些同学喜欢热闹，有些同学喜欢安静一点。</button>
+      <div class="game-banner"><div class="game-icon">🎈</div><div><strong>射气球游戏：找出“理解别人”的价值气球</strong><span>只射下正确的气球。射错会扣 10 魔法分，但可以继续挑战。</span></div></div>
+      <div class="balloon-field" id="balloonField">
+        <div class="balloon-score"><span>🎯 已射中 <b id="balloonHit">0</b>/5</span><span>❌ 误射 <b id="balloonMiss">0</b></span></div>
+        <div class="crosshair" id="crosshair"></div>
       </div>
-
-      <div class="sort-grid">
-        <div class="sort-bin" data-bin="habit"><h4>✋ 不同习惯 / 经历</h4><div class="bin-list"></div></div>
-        <div class="sort-bin" data-bin="personality"><h4>🌿 不同性格 / 感受</h4><div class="bin-list"></div></div>
-      </div>
-      <div class="feedback" id="fb-sort"></div>
-      <button class="complete-btn" id="complete2">✨ Mission 2 完成</button>
-    </div>
+      <div class="feedback" id="fb-balloon"></div>
+      <button class="complete-btn" id="complete2">✅ Mission 2 完成</button>
+</div>
   </section>
 
   <!-- Mission 3 -->
@@ -348,21 +483,22 @@ audio{width:100%;margin-top:12px}
       <span class="lock-msg">🔒 完成上一关解锁</span>
     </div>
     <div class="mission-body">
-      <div class="potion" id="potion">🧙‍♀️🫧</div>
-      <div class="potion-meter" id="potionMeter"><span class="drop"></span><span class="drop"></span><span class="drop"></span><span class="drop"></span></div>
-      <div class="task-title">把 4 个正确的“价值材料”加入药水：</div>
-      <div class="options" id="potionOptions">
-        <button class="option" data-good="true">👂 用心听同学说话</button>
-        <button class="option" data-good="false">😠 有误会就马上发脾气</button>
-        <button class="option" data-good="true">💬 先问清楚，再好好沟通</button>
-        <button class="option" data-good="true">🤝 看到同学有困难，主动帮助</button>
-        <button class="option" data-good="false">🙄 只顾自己的想法</button>
-        <button class="option" data-good="true">🌿 尊重不同性格和想法</button>
-        <button class="option" data-good="false">😂 嘲笑和自己不同的同学</button>
+      <div class="game-banner"><div class="game-icon">🧙‍♀️</div><div><strong>女巫魔法药水：调出“友好相处药水”</strong><span>从材料架加入 4 种正确的价值材料。错误材料会让药水冒黑烟。</span></div></div>
+      <div class="cauldron-wrap">
+        <div class="cauldron" id="gameCauldron">🫕</div>
+        <div class="recipe-slots" id="recipeSlots"><span class="recipe-slot"></span><span class="recipe-slot"></span><span class="recipe-slot"></span><span class="recipe-slot"></span></div>
       </div>
-      <div class="feedback" id="fb-potion"></div>
-      <button class="complete-btn" id="complete3">✨ Mission 3 完成</button>
-    </div>
+      <div class="ingredient-shelf" id="ingredientShelf">
+        <button class="ingredient" data-good="true">👂 用心听</button>
+        <button class="ingredient" data-good="false">😠 马上发脾气</button>
+        <button class="ingredient" data-good="true">💬 问清楚</button>
+        <button class="ingredient" data-good="true">🤝 主动帮助</button>
+        <button class="ingredient" data-good="false">😂 嘲笑别人</button>
+        <button class="ingredient" data-good="true">🌿 尊重不同</button>
+      </div>
+      <div class="feedback" id="fb-potion-game"></div>
+      <button class="complete-btn" id="complete3">✅ Mission 3 完成</button>
+</div>
   </section>
 
   <!-- Mission 4 -->
@@ -373,27 +509,35 @@ audio{width:100%;margin-top:12px}
       <span class="lock-msg">🔒 完成上一关解锁</span>
     </div>
     <div class="mission-body">
-      <div class="scenario-grid">
-        <div class="scenario">
-          <div class="scene-icon">😟👂</div>
-          <h4>情境 A：文静的同学</h4>
-          <p>一个比较文静的同学需要一点时间才敢说出自己的想法。你会怎么做？</p>
-          <button class="scene-answer" data-good="false">催他：“快点说啦！”</button>
-          <button class="scene-answer" data-good="true">给他时间，并鼓励他慢慢说。</button>
-          <button class="scene-answer" data-good="false">不理他，因为他很安静。</button>
+      <div class="game-banner"><div class="game-icon">🛟</div><div><strong>同学救援任务</strong><span>完成两段校园救援：先帮助文静同学，再帮助受伤同学。</span></div></div>
+      <div class="rescue-map">
+        <div class="rescue-progress"><span class="rescue-step on"></span><span class="rescue-step"></span></div>
+        <div class="rescue-scene active" data-rescue="0">
+          <div class="rescue-visual">😟🗯️</div>
+          <h4>第一站：文静的同学</h4>
+          <p class="task-text">他需要一点时间才敢说出自己的想法。请选择最合适的“救援工具”。</p>
+          <div class="rescue-tools">
+            <button class="rescue-tool" data-good="false">⏩ 催促：“快点说啦！”</button>
+            <button class="rescue-tool" data-good="true">⏳ 给他时间，鼓励他慢慢说</button>
+            <button class="rescue-tool" data-good="false">🚪 不理他，自己离开</button>
+          </div>
+          <div class="rescue-dialogue">选择一个行动。</div>
         </div>
-        <div class="scenario">
-          <div class="scene-icon">🤕🎒</div>
-          <h4>情境 B：同学受伤</h4>
-          <p>同学的手受伤了，拿书包不方便。你会怎么做？</p>
-          <button class="scene-answer" data-good="true">主动问他需不需要帮助，并帮他拿书包。</button>
-          <button class="scene-answer" data-good="false">假装没有看到。</button>
-          <button class="scene-answer" data-good="false">笑他动作很慢。</button>
+        <div class="rescue-scene" data-rescue="1">
+          <div class="rescue-visual">🤕🎒</div>
+          <h4>第二站：受伤的同学</h4>
+          <p class="task-text">他的手受伤了，拿书包不方便。你要怎样帮助他？</p>
+          <div class="rescue-tools">
+            <button class="rescue-tool" data-good="true">🤝 主动问需不需要帮助，并帮他拿书包</button>
+            <button class="rescue-tool" data-good="false">🙈 假装没看到</button>
+            <button class="rescue-tool" data-good="false">😂 笑他动作很慢</button>
+          </div>
+          <div class="rescue-dialogue">完成最后一站救援。</div>
         </div>
       </div>
-      <div class="feedback" id="fb-scenes"></div>
-      <button class="complete-btn" id="complete4">✨ Mission 4 完成</button>
-    </div>
+      <div class="feedback" id="fb-rescue"></div>
+      <button class="complete-btn" id="complete4">✅ Mission 4 完成</button>
+</div>
   </section>
 
   <!-- Mission 5 -->
@@ -422,14 +566,19 @@ audio{width:100%;margin-top:12px}
         </div>
       </div>
 
-      <div class="task-title" style="margin-top:16px">🔍 录像中最重要的共同点是什么？</div>
-      <div class="options" data-q="m5q1">
-        <button class="option" data-correct="true">A. 同学看到别人有困难，会主动关心和帮助。</button>
-        <button class="option" data-correct="false">B. 同学只需要照顾自己。</button>
-        <button class="option" data-correct="false">C. 同学有困难时，我们应该离开。</button>
-        <button class="option" data-correct="false">D. 成绩不好就不需要朋友。</button>
+      
+      <div class="game-banner" style="margin-top:16px"><div class="game-icon">🔍</div><div><strong>魔法录像找线索</strong><span>播放两段录像后，找出 3 个真正能支持“关爱同学”的线索。</span></div></div>
+      <div class="clue-board" id="clueBoard">
+        <button class="clue-card" data-good="true">🤕 同学受伤，拿东西不方便</button>
+        <button class="clue-card" data-good="true">🤝 男生主动帮忙拿书包</button>
+        <button class="clue-card" data-good="true">😊 女生安慰同学并帮她温习</button>
+        <button class="clue-card" data-good="false">🚶 大家都只顾自己离开</button>
+        <button class="clue-card" data-good="false">😂 同学看到困难就嘲笑</button>
+        <button class="clue-card" data-good="false">🙉 有人拒绝听同学说话</button>
       </div>
-      <div class="feedback" id="fb-m5q1"></div>
+      <div class="clue-count">已找到 <span id="clueCount">0</span>/3 个关键线索</div>
+      <div class="feedback" id="fb-clue"></div>
+
 
       <div class="task-title" style="margin-top:18px">🔊 Oral 词语魔法书</div>
       <div class="vocab-grid">
@@ -532,7 +681,7 @@ audio{width:100%;margin-top:12px}
 </div>
 
 <script>
-const KEY='p5-unit7-magic-progress-v1';
+const KEY='p5-unit7-game-progress-v2';
 let state={done:[],points:0,gems:0};
 try{state=JSON.parse(localStorage.getItem(KEY))||state}catch(e){}
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
@@ -604,145 +753,191 @@ function finishMission(n,btn=null){
   return true;
 }
 
-/* Generic MCQ */
-$$('[data-q]').forEach(group=>{
-  group.querySelectorAll('.option').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const id=group.dataset.q,fb=$(`#fb-${id}`);
-      if(btn.dataset.correct==='true'){
-        btn.classList.add('correct');
-        fb.className='feedback show good';fb.textContent='✨ 答对了！先了解原因、用心听和好好沟通，才能减少误会。';
-        if(id==='m1q1'){
-          const newlyDone=finishMission(1,$('#complete1'));
-          if(newlyDone){
-            fb.textContent='✨ 答对了！+100 魔法分，获得 1 颗「沟通宝石」。Mission 2 已解锁！';
-          }
-        }
-        if(id==='m5q1'){
-          const newlyDone=finishMission(5,$('#complete5'));
-          if(newlyDone){
-            fb.textContent='✨ 观察正确！+100 魔法分，获得 1 颗「观察宝石」。Oral Boss Challenge 已解锁！';
-          }
-        }
-      }else{
-        btn.classList.add('wrong');
-        fb.className='feedback show bad';fb.textContent='再想一想：友好相处需要先理解对方，而不是马上生气或离开。你可以再试一次。';
-        setTimeout(()=>btn.classList.remove('wrong'),650)
-      }
-    })
-  })
-});
+/* ===== Game logic ===== */
 
-
-/* Sorting */
-let selectedSort=null, sortedCount=0;
-$$('#sortChoices .choice-chip').forEach(chip=>{
-  chip.onclick=()=>{
-    if(chip.classList.contains('selected'))return;
-    selectedSort=chip;
-    $$('.sort-bin').forEach(b=>b.style.outline='2px solid rgba(224,187,98,.35)');
-    $('#fb-sort').className='feedback show';$('#fb-sort').textContent='现在点击正确的魔法镜。';
+/* Mission 1: Monster battle */
+const battleRounds=[
+  {
+    q:'同学之间发生误会了，你先用哪一种魔法？',
+    opts:[
+      ['🔥 马上生气','bad'],['🔎 先问清楚','good'],['🥊 和同学打架','bad'],['🚫 不再说话','bad']
+    ]
+  },
+  {
+    q:'同学正在解释原因，你应该怎样做？',
+    opts:[
+      ['👂 用心听','good'],['🙉 不听解释','bad'],['😆 嘲笑他','bad'],['📱 自己玩手机','bad']
+    ]
+  },
+  {
+    q:'了解原因以后，怎样让关系恢复？',
+    opts:[
+      ['🤝 好好沟通、互相体谅','good'],['😠 继续生气','bad'],['📣 到处说坏话','bad'],['👊 再吵一次','bad']
+    ]
   }
-});
-$$('.sort-bin').forEach(bin=>{
-  bin.onclick=()=>{
-    if(!selectedSort)return;
-    const good=selectedSort.dataset.cat===bin.dataset.bin;
-    const fb=$('#fb-sort');
-    if(good){
-      const item=document.createElement('div');item.className='bin-item';item.textContent='✨ '+selectedSort.textContent.replace(/^[^\s]+\s/,'');
-      bin.querySelector('.bin-list').appendChild(item);
-      selectedSort.classList.add('selected');selectedSort=null;sortedCount++;
-      $$('.sort-bin').forEach(b=>b.style.outline='none');
-      fb.className='feedback show good';fb.textContent='正确！不同习惯和性格会带来不同的生活经历和感受。';
-      if(sortedCount===4){
-        const newlyDone=finishMission(2,$('#complete2'));
-        if(newlyDone){
-          fb.textContent='✨ 全部配对正确！+100 魔法分，获得 1 颗「理解宝石」。Mission 3 已解锁！';
-        }
-      }
-    }else{
-      fb.className='feedback show bad';fb.textContent='这面魔法镜不太合适，再试一次。';
+];
+let battleIndex=0,heroHP=3,monsterHP=3;
+function drawBattle(){
+  const round=battleRounds[battleIndex];
+  if(!round)return;
+  $('#battleRound').textContent=`Round ${battleIndex+1} / 3 · ${round.q}`;
+  const grid=$('#spellGrid');grid.innerHTML='';
+  round.opts.forEach(([txt,type])=>{
+    const b=document.createElement('button');b.className='spell-card';b.textContent=txt;
+    b.onclick=()=>battleChoose(type,b);grid.appendChild(b);
+  });
+}
+function battleChoose(type,btn){
+  $$('#spellGrid .spell-card').forEach(b=>b.disabled=true);
+  const mon=$('#monsterAvatar'),msg=$('#battleMsg');
+  if(type==='good'){
+    monsterHP--;$('#monsterHp').style.width=(monsterHP/3*100)+'%';$('#monsterHpText').textContent=`${monsterHP} 💜`;
+    mon.classList.remove('hit');void mon.offsetWidth;mon.classList.add('hit');
+    const d=document.createElement('div');d.className='damage-pop';d.textContent='-1 💥';$('#battleArena').appendChild(d);setTimeout(()=>d.remove(),900);
+    msg.textContent='✨ 魔法命中！理解、倾听和沟通正在削弱“误会怪兽”。';
+    battleIndex++;
+    if(monsterHP<=0){
+      setTimeout(()=>{
+        mon.textContent='💫';msg.textContent='🏆 你打败了“误会怪兽”！+100 魔法分，获得「沟通宝石」。';
+        finishMission(1,$('#complete1'));
+      },550);return;
     }
+  }else{
+    heroHP=Math.max(0,heroHP-1);$('#heroHp').style.width=(heroHP/3*100)+'%';$('#heroHpText').textContent=`${heroHP} ❤️`;
+    mon.classList.remove('attack');void mon.offsetWidth;mon.classList.add('attack');
+    msg.textContent='👾 怪兽反击！这个做法会让误会更严重。再试一次。';
+    if(heroHP===0){heroHP=3;$('#heroHp').style.width='100%';$('#heroHpText').textContent='3 ❤️';msg.textContent+=' 魔法盾帮你恢复了生命。'}
   }
+  setTimeout(drawBattle,700);
+}
+drawBattle();
+
+/* Mission 2: Balloon shooting */
+const balloons=[
+ ['不同习惯会带来不同经历',true,8,14],
+ ['文静同学可能需要更多时间',true,57,12],
+ ['所有同学的感受都一样',false,30,30],
+ ['要努力了解别人',true,69,37],
+ ['和我不同就是不对',false,5,48],
+ ['尊重不同想法',true,40,56],
+ ['可以强迫别人和自己一样',false,67,68],
+ ['关注同学的感受',true,12,76]
+];
+let balloonHit=0,balloonMiss=0;
+function makeBalloons(){
+ const field=$('#balloonField'),cross=$('#crosshair');
+ balloons.forEach(([txt,good,x,y],i)=>{
+   const b=document.createElement('button');b.className='balloon';
+   b.style.left=x+'%';b.style.top=y+'%';b.style.animationDelay=(-i*.37)+'s';
+   b.innerHTML=`<span class="bubble">${txt}</span><span class="string"></span>`;
+   b.addEventListener('click',e=>{
+     if(b.classList.contains('popped'))return;
+     const fr=field.getBoundingClientRect();cross.style.left=(e.clientX-fr.left)+'px';cross.style.top=(e.clientY-fr.top)+'px';
+     cross.classList.remove('fire');void cross.offsetWidth;cross.classList.add('fire');
+     const fb=$('#fb-balloon');
+     if(good){
+       b.classList.add('popped');balloonHit++;$('#balloonHit').textContent=balloonHit;
+       fb.className='feedback show good';fb.textContent='🎯 射中了价值气球！';
+       if(balloonHit===5){
+         fb.textContent='🏆 5 个价值气球全部射中！+100 魔法分，获得「理解宝石」。';
+         finishMission(2,$('#complete2'));
+       }
+     }else{
+       balloonMiss++;$('#balloonMiss').textContent=balloonMiss;
+       state.points=Math.max(0,state.points-10);save();
+       fb.className='feedback show bad';fb.textContent='💨 这是“错误想法气球”。误射 -10 分，但可以继续挑战。';
+       b.classList.add('wrong');
+     }
+   });
+   field.appendChild(b);
+ });
+}
+makeBalloons();
+
+/* Mission 3: Potion laboratory */
+let ingredientsGood=0;
+$$('#ingredientShelf .ingredient').forEach(btn=>{
+ btn.onclick=()=>{
+   const fb=$('#fb-potion-game'),cauld=$('#gameCauldron');
+   if(btn.dataset.good==='true'){
+     btn.classList.add('used');ingredientsGood++;
+     $$('#recipeSlots .recipe-slot')[ingredientsGood-1].classList.add('filled');
+     cauld.classList.remove('bubble');void cauld.offsetWidth;cauld.classList.add('bubble');
+     fb.className='feedback show good';fb.textContent='🫧 正确材料加入药水！';
+     if(ingredientsGood===4){
+       cauld.textContent='🧪✨';
+       fb.textContent='🏆 “友好相处药水”完成！+100 魔法分，获得「尊重宝石」。';
+       finishMission(3,$('#complete3'));
+     }
+   }else{
+     btn.classList.remove('badshake');void btn.offsetWidth;btn.classList.add('badshake');
+     cauld.textContent='🫕💨';setTimeout(()=>cauld.textContent='🫕',650);
+     fb.className='feedback show bad';fb.textContent='💨 错误材料！发脾气和嘲笑会破坏友谊药水。';
+   }
+ }
 });
 
-
-/* Potion */
-let potionGood=0;
-$$('#potionOptions .option').forEach(btn=>{
+/* Mission 4: Rescue quest */
+let rescueIndex=0;
+$$('.rescue-scene').forEach((scene,idx)=>{
+ scene.querySelectorAll('.rescue-tool').forEach(btn=>{
   btn.onclick=()=>{
-    const fb=$('#fb-potion');
-    if(btn.disabled)return;
-    if(btn.dataset.good==='true'){
-      btn.disabled=true;btn.classList.add('correct');potionGood++;
-      $$('#potionMeter .drop')[potionGood-1].classList.add('on');
-      $('#potion').classList.remove('brew');void $('#potion').offsetWidth;$('#potion').classList.add('brew');
-      fb.className='feedback show good';fb.textContent='✨ 正确材料！尊重、倾听、沟通和帮助会让同学关系更和谐。';
-      if(potionGood===4){
-        const newlyDone=finishMission(3,$('#complete3'));
-        if(newlyDone){
-          fb.textContent='🧪 “友好相处药水”完成！+100 魔法分，获得 1 颗「尊重宝石」。Mission 4 已解锁！';
-        }
-      }
+   const dialogue=scene.querySelector('.rescue-dialogue');
+   if(btn.dataset.good==='true'){
+    btn.classList.add('good');
+    dialogue.textContent=idx===0?'✨ 救援成功：你尊重了文静同学的节奏和感受。':'✨ 救援成功：你主动关心并帮助了有困难的同学。';
+    if(idx===0){
+      setTimeout(()=>{
+       scene.classList.remove('active');$$('.rescue-scene')[1].classList.add('active');$$('.rescue-step')[1].classList.add('on');
+      },700);
     }else{
-      btn.classList.add('wrong');fb.className='feedback show bad';fb.textContent='这个材料会破坏友谊药水。再选择一个更尊重、关爱同学的做法。';
-      setTimeout(()=>btn.classList.remove('wrong'),650)
+      const fb=$('#fb-rescue');fb.className='feedback show good';fb.textContent='🏆 两段校园救援完成！+100 魔法分，获得「关爱宝石」。';
+      finishMission(4,$('#complete4'));
     }
+   }else{
+    btn.classList.add('bad');dialogue.textContent='再想一想：这个行动有没有关注对方的感受和需要？';
+    setTimeout(()=>btn.classList.remove('bad'),700);
+   }
   }
+ })
 });
 
-
-/* Scenario */
-let scenariosPassed=new Set();
-$$('.scenario').forEach((sc,idx)=>{
-  sc.querySelectorAll('.scene-answer').forEach(btn=>{
-    btn.onclick=()=>{
-      const fb=$('#fb-scenes');
-      if(btn.dataset.good==='true'){
-        btn.classList.add('correct');scenariosPassed.add(idx);
-        fb.className='feedback show good';fb.textContent='✨ 很好！先关注同学的感受和需要，再作出体贴的行动。';
-        if(scenariosPassed.size===2){
-          const newlyDone=finishMission(4,$('#complete4'));
-          if(newlyDone){
-            fb.textContent='✨ 两个生活情境都完成！+100 魔法分，获得 1 颗「关爱宝石」。Mission 5 已解锁！';
-          }
-        }
-      }else{
-        btn.classList.add('wrong');fb.className='feedback show bad';fb.textContent='再想一想：这个做法有没有尊重对方的感受和需要？';
-        setTimeout(()=>btn.classList.remove('wrong'),650)
-      }
-    }
-  })
-});
-
-
-/* Fake video */
+/* Mission 5: Fake video + clue hunt */
 let scene='A',videoTimer=null;
 function activeFrames(){return scene==='A'?$$('#framesA .frame'):$$('#framesB .frame')}
 function resetFrames(){activeFrames().forEach((f,i)=>f.classList.toggle('active',i===0))}
 $('#sceneSwitch').onclick=()=>{
-  clearInterval(videoTimer);
-  scene=scene==='A'?'B':'A';
-  $('#framesA').style.display=scene==='A'?'block':'none';
-  $('#framesB').style.display=scene==='B'?'block':'none';
+  clearInterval(videoTimer);scene=scene==='A'?'B':'A';
+  $('#framesA').style.display=scene==='A'?'block':'none';$('#framesB').style.display=scene==='B'?'block':'none';
   $('#sceneLabel').textContent=scene==='A'?'Scene A · 帮助受伤同学':'Scene B · 安慰和帮助同学';
-  $('#sceneSwitch').textContent=scene==='A'?'切换 Scene B':'切换 Scene A';
-  resetFrames()
+  $('#sceneSwitch').textContent=scene==='A'?'切换 Scene B':'切换 Scene A';resetFrames()
 };
 $('#playVideo').onclick=()=>{
-  clearInterval(videoTimer);resetFrames();let i=0;const fs=activeFrames();
-  $('#playVideo').textContent='⏸ 播放中...';
-  videoTimer=setInterval(()=>{
-    fs[i].classList.remove('active');i++;
-    if(i>=fs.length){clearInterval(videoTimer);$('#playVideo').textContent='▶ 再播放一次';return}
-    fs[i].classList.add('active')
-  },2200)
+  clearInterval(videoTimer);resetFrames();let i=0;const fs=activeFrames();$('#playVideo').textContent='⏸ 播放中...';
+  videoTimer=setInterval(()=>{fs[i].classList.remove('active');i++;if(i>=fs.length){clearInterval(videoTimer);$('#playVideo').textContent='▶ 再播放一次';return}fs[i].classList.add('active')},2200)
 };
 $$('.speak').forEach(btn=>btn.onclick=()=>{
-  if('speechSynthesis' in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(btn.dataset.say);u.lang='zh-CN';u.rate=.78;speechSynthesis.speak(u)}
+ if('speechSynthesis' in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(btn.dataset.say);u.lang='zh-CN';u.rate=.78;speechSynthesis.speak(u)}
 });
-
+let clueFound=0;
+$$('#clueBoard .clue-card').forEach(btn=>{
+ btn.onclick=()=>{
+  if(btn.classList.contains('found'))return;
+  const fb=$('#fb-clue');
+  if(btn.dataset.good==='true'){
+    btn.classList.add('found');clueFound++;$('#clueCount').textContent=clueFound;
+    fb.className='feedback show good';fb.textContent='🔍 找到关键线索！';
+    if(clueFound===3){
+      fb.textContent='🏆 3 个关键线索全部找到！+100 魔法分，获得「观察宝石」。';
+      finishMission(5,$('#complete5'));
+    }
+  }else{
+    btn.classList.remove('decoy');void btn.offsetWidth;btn.classList.add('decoy');
+    fb.className='feedback show bad';fb.textContent='这不是录像中的关爱线索。再观察人物的困难、行动和结果。';
+    setTimeout(()=>btn.classList.remove('decoy'),650);
+  }
+ }
+});
 
 /* Oral */
 $$('.oraltab').forEach(tab=>tab.onclick=()=>{
