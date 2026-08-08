@@ -524,6 +524,36 @@ background:linear-gradient(165deg,rgba(49,24,78,.58),rgba(17,8,29,.88));overflow
 .rush-skip-stat{color:#dff5e6!important}
 @media(max-width:480px){.rush-decision{grid-template-columns:1fr}}
 
+
+.learning-map{
+  margin:18px 0 4px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px
+}
+.learning-map div{
+  padding:10px;border-radius:14px;border:1px solid rgba(176,122,229,.18);
+  background:rgba(176,122,229,.045);text-align:center;font-size:12px;color:var(--soft)
+}
+.learning-map b{display:block;color:var(--gold2);font-size:12px;margin-bottom:3px}
+.exit-ticket{
+  position:relative;margin:30px 0;border-radius:25px;border:1px solid rgba(224,187,98,.34);
+  background:linear-gradient(160deg,rgba(224,187,98,.08),rgba(64,28,102,.20),rgba(19,8,32,.92));
+  overflow:hidden;box-shadow:0 18px 42px rgba(0,0,0,.30)
+}
+.exit-ticket.locked{filter:saturate(.45);opacity:.55}
+.exit-ticket.locked .exit-body{display:none}
+.exit-head{padding:20px;display:flex;align-items:center;gap:13px;border-bottom:1px solid rgba(224,187,98,.15)}
+.exit-head .ticket{font-size:35px}.exit-head h3{margin:0;color:var(--gold2);font-size:23px}.exit-head p{margin:3px 0 0;color:var(--soft);font-size:12px}
+.exit-body{padding:20px}.exit-step{padding:14px;border-radius:16px;border:1px solid rgba(176,122,229,.17);background:rgba(176,122,229,.045);margin:10px 0}
+.exit-step h4{margin:0 0 9px;color:#f2dfaf}.exit-choice{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.exit-btn{border:1px solid rgba(176,122,229,.20);background:rgba(176,122,229,.065);color:var(--cream);border-radius:13px;padding:10px;text-align:left;font-weight:850;cursor:pointer}
+.exit-btn.good{background:rgba(115,185,142,.16);border-color:var(--green)}.exit-btn.bad{background:rgba(212,108,126,.13);border-color:var(--red)}
+.exit-feedback{min-height:30px;color:var(--soft);font-size:12px;line-height:1.5;margin-top:7px}
+.exit-report{display:none;margin-top:15px;padding:16px;border-radius:18px;border:1px solid rgba(224,187,98,.25);background:rgba(224,187,98,.055)}
+.exit-report.show{display:block}.exit-report h4{margin:0 0 10px;color:var(--gold2);font-size:19px}
+.report-row{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid rgba(224,187,98,.11);font-size:13px}.report-row:last-child{border:0}
+.report-next{margin-top:10px;color:var(--soft);font-size:12px;line-height:1.55}
+.screenshot-note{text-align:center;margin-top:12px;padding:9px;border-radius:12px;background:rgba(111,168,214,.07);color:#cbddeb;font-size:12px}
+@media(max-width:650px){.learning-map{grid-template-columns:1fr 1fr}.exit-choice{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -544,7 +574,7 @@ background:linear-gradient(165deg,rgba(49,24,78,.58),rgba(17,8,29,.88));overflow
     <h1>我们的生活经历</h1>
     <h2>《同学之间》× CCE × Oral 魔法任务</h2>
     <p>不同的生活经历、习惯和性格，会影响我们的想法和感受。通过华文课文、CCE 情境和录像口试任务，学习尊重不同的想法、关心同学的感受，并用华文表达价值观。</p>
-    <div class="bridge">👾 打怪兽 → 🎈 射气球 → 🧙‍♀️ 魔法药水 → 🛟 同学救援 → 🔍 录像找线索 → 🎤 Oral Boss</div>
+    <div class="bridge">📖 CL → ❤️ CCE → 🌱 我的生活 → 🎬 录像观察 → 🎤 Oral → 🎫 Exit Ticket</div>
     <div class="voice-hint">🔊 看不懂字也没关系：点击有 🔊 的选项，网页会把华文读给你听。</div>
     <div class="progress-shell">
       <div class="progress-top"><span>魔法学习进度</span><span id="progressText">0 / 6 Missions</span></div>
@@ -560,6 +590,13 @@ background:linear-gradient(165deg,rgba(49,24,78,.58),rgba(17,8,29,.88));overflow
       <div class="intro-pill"><b>沟通</b><br>学习与拥有不同经历和观点的人交流。</div>
     </div>
   </section>
+
+  <div class="learning-map">
+    <div><b>📖 Mission 1</b>CL《同学之间》</div>
+    <div><b>❤️ Mission 2–4</b>CCE + 生活应用</div>
+    <div><b>🎬 Mission 5–6</b>录像 + Oral 表达</div>
+    <div><b>🎫 Final Check</b>AfL Exit Ticket</div>
+  </div>
 
   <!-- Mission 1 -->
   <section class="mission" id="m1" data-mission="1">
@@ -725,11 +762,60 @@ background:linear-gradient(165deg,rgba(49,24,78,.58),rgba(17,8,29,.88));overflow
 </div>
   </section>
 
+  <section class="exit-ticket locked" id="exitTicket">
+    <div class="exit-head">
+      <div class="ticket">🎫</div>
+      <div><h3>Final Magic Check · Exit Ticket</h3><p>最后 3 分钟：检查“我懂、我会做、我会说”。</p></div>
+      <span class="lock-msg" id="exitLock">🔒 完成 Mission 6 后解锁</span>
+    </div>
+    <div class="exit-body">
+      <div class="exit-step" data-exit-step="1">
+        <h4>❤️ 1. 我懂了吗？</h4>
+        <div class="task-text">同学和我的想法不同，我应该怎样做？</div>
+        <div class="exit-choice">
+          <button class="exit-btn" data-good="true">👂 先听一听，尊重他的想法</button>
+          <button class="exit-btn" data-good="false">😠 一定要他和我想得一样</button>
+        </div>
+        <div class="exit-feedback"></div>
+      </div>
+      <div class="exit-step" data-exit-step="2">
+        <h4>🌱 2. 我会做吗？</h4>
+        <div class="task-text">同学受伤了，拿东西不方便，我会……</div>
+        <div class="exit-choice">
+          <button class="exit-btn" data-good="true">🤝 主动问他需不需要帮助</button>
+          <button class="exit-btn" data-good="false">🙈 假装没有看到</button>
+        </div>
+        <div class="exit-feedback"></div>
+      </div>
+      <div class="exit-step">
+        <h4>🎤 3. 我会说吗？</h4>
+        <div class="task-text">你已经完成 Oral Boss Challenge。请用下面的句子快速检查自己：</div>
+        <div class="scaffold">
+          <p>我学会了……</p>
+          <p>同学之间应该……</p>
+          <p>因为……</p>
+        </div>
+        <label class="check"><input type="checkbox" id="exitSpeakCheck">我可以用华文说出至少 2–3 句完整句。</label>
+      </div>
+
+      <button class="complete-btn show" id="submitExit" type="button">✨ 完成 Exit Ticket</button>
+
+      <div class="exit-report" id="exitReport">
+        <h4>🏆 Unit 7 Exit Ticket Report</h4>
+        <div class="report-row"><span>❤️ 理解价值观</span><b id="reportUnderstand">—</b></div>
+        <div class="report-row"><span>🌱 应用在生活</span><b id="reportApply">—</b></div>
+        <div class="report-row"><span>🎤 Oral 表达</span><b id="reportSpeak">—</b></div>
+        <div class="report-next" id="reportNext"></div>
+        <div class="screenshot-note">📸 可以截图这个报告交给老师，作为今天的 Exit Ticket。</div>
+      </div>
+    </div>
+  </section>
+
   <section class="mission locked" id="finalBadge">
     <div class="badge-box">
       <div class="badge-big">🏆💜</div>
       <h3>Unit 7 Mission Complete!</h3>
-      <p>你已经完成《同学之间》×《我们的生活经历》× Oral 的魔法学习路线。</p>
+      <p>你已经完成 CL《同学之间》× CCE《我们的生活经历》× Oral × Exit Ticket 的完整学习路线。</p>
       <p><b>你解锁了：</b>尊重不同想法 · 关注别人感受 · 用心听 · 好好沟通 · 互相帮助</p>
       <button class="reset" id="reset">重新挑战 Unit 7</button>
     </div>
@@ -755,7 +841,8 @@ function renderProgress(){
     const btn=$(`#complete${n}`);
     if(btn){btn.textContent='✅ 已完成';btn.classList.add('show');btn.disabled=true}
   });
-  if(state.done.includes(6)) $('#finalBadge').classList.remove('locked');
+  if(state.done.includes(6)) unlockExitTicket();
+  if(localStorage.getItem(KEY+'-exit')==='done') $('#finalBadge').classList.remove('locked');
 }
 function unlock(n){
   const el=$(`#m${n}`);if(!el)return;
@@ -803,8 +890,8 @@ function finishMission(n,btn=null){
       if(next) next.scrollIntoView({behavior:'smooth',block:'start'});
     },900);
   }else{
-    $('#finalBadge').classList.remove('locked');
-    setTimeout(()=>$('#finalBadge').scrollIntoView({behavior:'smooth'}),700);
+    unlockExitTicket();
+    setTimeout(()=>$('#exitTicket').scrollIntoView({behavior:'smooth',block:'start'}),700);
   }
   return true;
 }
@@ -856,7 +943,8 @@ function enableChoiceSpeech(){
     '.option',
     '.choice-chip',
     '.scene-answer',
-    '.oraltab'
+    '.oraltab',
+    '.exit-btn'
   ];
 
   document.querySelectorAll(selectors.join(',')).forEach(btn=>{
@@ -1177,6 +1265,50 @@ function fallbackScore(qnum,duration){const durationPts=duration>=40?25:duration
 $$('.q-practice').forEach(box=>{const qnum=Number(box.dataset.qnum),timerEl=box.querySelector('[data-role=timer]'),prepBtn=box.querySelector('[data-action=prep]'),startBtn=box.querySelector('[data-action=start]'),stopBtn=box.querySelector('[data-action=stop]'),audio=box.querySelector('.q-audio'),transcriptBox=box.querySelector('[data-role=transcript]'),scoreCard=box.querySelector('[data-role=score]');let prepTimer=null,seconds=30,recStart=0,recognizedText='';prepBtn.onclick=()=>{clearInterval(prepTimer);seconds=30;timerEl.textContent='30';prepBtn.disabled=true;prepTimer=setInterval(()=>{seconds--;timerEl.textContent=seconds;if(seconds<=0){clearInterval(prepTimer);prepBtn.disabled=false;prepBtn.textContent='⏳ 再准备 30 秒';}},1000);};startBtn.onclick=async()=>{if(activeMediaRecorder&&activeMediaRecorder.state!=='inactive')return;try{activeStream=await navigator.mediaDevices.getUserMedia({audio:true});let chunks=[];activeMediaRecorder=new MediaRecorder(activeStream);recognizedText='';const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(SR){try{activeRecognition=new SR();activeRecognition.lang='zh-CN';activeRecognition.continuous=true;activeRecognition.interimResults=true;activeRecognition.onresult=e=>{let t='';for(let i=0;i<e.results.length;i++)t+=e.results[i][0].transcript;recognizedText=t;transcriptBox.classList.add('show');transcriptBox.innerHTML='<b>📝 语音识别草稿：</b>'+recognizedText;};activeRecognition.onerror=()=>{};activeRecognition.start();}catch(e){activeRecognition=null;}}activeMediaRecorder.ondataavailable=e=>chunks.push(e.data);recStart=Date.now();activeMediaRecorder.onstop=()=>{const duration=(Date.now()-recStart)/1000,blob=new Blob(chunks,{type:chunks[0]?.type||'audio/webm'});audio.src=URL.createObjectURL(blob);audio.style.display='block';if(activeRecognition){try{activeRecognition.stop()}catch(e){}}if(activeStream)activeStream.getTracks().forEach(t=>t.stop());startBtn.classList.remove('recording');startBtn.textContent='🎙️ 再录一次';startBtn.disabled=false;stopBtn.disabled=true;let result,mode;if(recognizedText&&recognizedText.replace(/\s/g,'').length>=6){result=scoreTranscript(qnum,recognizedText);mode='语音内容分析';transcriptBox.classList.add('show');transcriptBox.innerHTML='<b>📝 语音识别草稿：</b>'+recognizedText+'<br><small>如果识别文字有少量错误，以你的实际录音为准。</small>';}else{result=fallbackScore(qnum,duration);mode='基础练习评分';transcriptBox.classList.add('show');transcriptBox.innerHTML='<b>ℹ️ 本次没有取得可靠的中文语音转文字。</b> 你仍然可以回听录音，并参考网页给出的基础练习反馈。';}renderScore(scoreCard,result.total,result.parts,result.feedback,mode);oralDone.add(qnum);$('#oralFinishStatus').textContent=`🎤 已完成 ${oralDone.size}/3 题录音。${oralDone.size===3?'三题都完成了，可以领取 Oral Boss 宝石！':'继续完成其他题。'}`;if(oralDone.size===3)$('#complete6').classList.add('show');activeMediaRecorder=null;activeRecognition=null;activeStream=null;};activeMediaRecorder.start();startBtn.classList.add('recording');startBtn.textContent='🔴 录音中...';startBtn.disabled=true;stopBtn.disabled=false;}catch(e){alert('无法使用麦克风。请到浏览器设置允许此网站使用麦克风，然后再试一次。');}};stopBtn.onclick=()=>{if(activeMediaRecorder&&activeMediaRecorder.state!=='inactive')activeMediaRecorder.stop();};});
 $('#complete6').onclick=e=>{if(oralDone.size<3){$('#oralFinishStatus').textContent='还需要完成 Q1、Q2、Q3 三题录音才可以过关。';return;}finishMission(6,e.currentTarget);};
 
+
+/* Final AfL / Exit Ticket */
+let exitResults={1:null,2:null};
+function unlockExitTicket(){
+  const box=$('#exitTicket');
+  if(!box)return;
+  box.classList.remove('locked');
+  const lock=$('#exitLock'); if(lock) lock.textContent='✨ 已解锁';
+}
+$$('.exit-step[data-exit-step]').forEach(step=>{
+  const n=Number(step.dataset.exitStep);
+  const fb=step.querySelector('.exit-feedback');
+  step.querySelectorAll('.exit-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      step.querySelectorAll('.exit-btn').forEach(b=>b.classList.remove('good','bad'));
+      const good=btn.dataset.good==='true';
+      exitResults[n]=good;
+      btn.classList.add(good?'good':'bad');
+      fb.textContent=good
+        ? '✨ 对了！这个做法体现了尊重、关爱和体谅。'
+        : '再想一想：这个做法有没有考虑同学的感受和需要？你可以重新选择。';
+      fb.style.color=good?'#cfe9d8':'#f0c2ca';
+      speakChinese(btn.innerText||btn.textContent,btn);
+    });
+  });
+});
+$('#submitExit').addEventListener('click',()=>{
+  if(exitResults[1]!==true || exitResults[2]!==true){
+    alert('请先完成前面两个 Exit Ticket 情境，并找出合适的做法。');
+    return;
+  }
+  const speakOk=$('#exitSpeakCheck').checked;
+  $('#reportUnderstand').textContent='✅ 已掌握';
+  $('#reportApply').textContent='✅ 已掌握';
+  $('#reportSpeak').textContent=speakOk?'✅ 我可以说':'🟡 继续练习';
+  $('#reportNext').textContent=speakOk
+    ? '下一步：继续在真实生活中用“先听、理解、沟通、帮助”的方法和同学相处。'
+    : '下一步：再用“我学会了……同学之间应该……因为……”练习说 2–3 句。';
+  $('#exitReport').classList.add('show');
+  localStorage.setItem(KEY+'-exit','done');
+  $('#finalBadge').classList.remove('locked');
+  setTimeout(()=>$('#exitReport').scrollIntoView({behavior:'smooth',block:'center'}),250);
+});
+
 /* Music */
 let ctx=null,master=null,musicTimer=null,musicOn=false;
 const notes=[261.63,311.13,392,466.16,523.25];
@@ -1187,7 +1319,7 @@ $('#music').onclick=()=>{
   else{ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();master=ctx.createGain();master.gain.value=.20;master.connect(ctx.destination);musicOn=true;$('#music').textContent='♫ 关闭';phrase()}
 };
 
-$('#reset').onclick=()=>{localStorage.removeItem(KEY);location.reload()};
+$('#reset').onclick=()=>{localStorage.removeItem(KEY);localStorage.removeItem(KEY+'-exit');location.reload()};
 renderProgress();
 </script>
 </body>
